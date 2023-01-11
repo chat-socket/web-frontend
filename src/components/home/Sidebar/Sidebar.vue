@@ -6,7 +6,7 @@ import useChatStore from "../../../stores/chat";
 import FadeTransition from "../../reusables/transitions/FadeTransition.vue";
 import Contacts from "./Contacts/Contacts.vue";
 import Conversations from "./Conversations/Conversations.vue";
-import Notifications from "./Notifications/Notifications.vue";
+import ArchivedConversations from "./Conversations/ArchivedConversations.vue";
 import Calls from "./Calls/Calls.vue";
 import Settings from "./Settings/Settings.vue";
 
@@ -18,8 +18,8 @@ const ActiveComponent = computed(() => {
         return Conversations;
     } else if (chat.activeSidebarComponent === 'contacts') {
         return Contacts;
-    } else if (chat.activeSidebarComponent === 'notifications') {
-        return Notifications;
+    } else if (chat.activeSidebarComponent === 'archived_conversations') {
+        return ArchivedConversations;
     } else if (chat.activeSidebarComponent === 'phone') {
         return Calls;
     } else if (chat.activeSidebarComponent === 'settings') {

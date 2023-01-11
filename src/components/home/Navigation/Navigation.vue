@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ForwardIcon } from "@heroicons/vue/24/outline";
-import { BellIcon, ChatBubbleOvalLeftIcon, Cog6ToothIcon, MoonIcon, PhoneIcon, SunIcon, UserIcon } from "@heroicons/vue/24/solid";
+import { ChatBubbleOvalLeftIcon, Cog6ToothIcon, MoonIcon, PhoneIcon, SunIcon, UserIcon } from "@heroicons/vue/24/solid";
+import { ArchiveBoxIcon} from "@heroicons/vue/24/outline";
 import { ref } from "vue";
 
 
@@ -26,19 +26,6 @@ const handleActiveSidebarComponentChange = (value: string) => {
 <template>
     <div
         class="xs:w-full md:w-11 md:h-full md:py-7 xs:py-5 px-5 flex xs:flex-row md:flex-col  items-center  transition-all duration-500">
-        <!--logo-->
-        <div class="mb-7 h-7 xs:hidden md:block">
-            <a href="#mainContent" title="Skip to main content" @blur="SkipLinkFocused = false"
-                @focus="SkipLinkFocused = true" class="outline-none"
-                :class="{absolute: !SkipLinkFocused, 'right-[10000px]': !SkipLinkFocused}">
-                <ForwardIcon class="w-7 h-6 text-indigo-300" />
-            </a>
-
-            <button aria-label="avian logo" :class="{'hidden':SkipLinkFocused}" class="outline-none">
-                <img v-if="!chat.settings[2].settings[0].value" src="../../../assets/logo.svg" class="w-8 h-7" />
-                <img v-else src="../../../assets/logo-white.svg" class="w-8 h-7 opacity-40" />
-            </button>
-        </div>
 
         <!--main navigation-->
         <div class="grow">
@@ -46,11 +33,18 @@ const handleActiveSidebarComponentChange = (value: string) => {
                 <ul class="xs:flex md:block xs:justify-between xs:items-center">
                     <!--message button-->
                     <li>
-                        <NavLink :icon="ChatBubbleOvalLeftIcon" title="Conversations"
+                        <NavLink :icon="ChatBubbleOvalLeftIcon" title="Conversations" :notifications="3"
                             @click="() => handleActiveSidebarComponentChange('messages')"
                             :active="chat.activeSidebarComponent === 'messages'" />
                     </li>
 
+                    <!--notifications button-->
+                    <li class="xs:hidden md:inline">
+                        <NavLink :icon="ArchiveBoxIcon" title="Archived Conversations" 
+                            @click="()=>handleActiveSidebarComponentChange('archived_conversations')"
+                            :active="chat.activeSidebarComponent === 'archived_conversations'" />
+                    </li>
+                    
                     <!--contacts list button-->
                     <li>
                         <NavLink :icon="UserIcon" title="Contacts"
@@ -76,16 +70,9 @@ const handleActiveSidebarComponentChange = (value: string) => {
                         </div>
                     </li>
 
-                    <!--notifications button-->
-                    <li class="xs:hidden md:inline">
-                        <NavLink :icon="BellIcon" title="Notifications" :notifications="3"
-                            @click="()=>handleActiveSidebarComponentChange('notifications')"
-                            :active="chat.activeSidebarComponent === 'notifications'" />
-                    </li>
-
                     <!--voice call button-->
                     <li>
-                        <NavLink :icon="PhoneIcon" title="Call log"
+                        <NavLink :icon="PhoneIcon" title="Call log" :notifications="1"
                             @click="()=>handleActiveSidebarComponentChange('phone')"
                             :active="chat.activeSidebarComponent === 'phone'" />
                     </li>
