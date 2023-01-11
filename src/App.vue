@@ -3,7 +3,9 @@ import { computed } from "vue";
 
 import useChatStore from './stores/chat';
 
-import FadeTransition from './components/reusables/transitions/FadeTransition.vue'; const chat = useChatStore();
+import FadeTransition from './components/reusables/transitions/FadeTransition.vue';
+
+const chat = useChatStore();
 
 // fix height on mobile screens
 // todo add video calling
