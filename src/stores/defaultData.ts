@@ -28,7 +28,7 @@ export const DefaultSettings = [
         'title': 'Appearance',
         'description': 'Customize the look and feel',
         'settings': [
-            { id: 1, type: 'switch', value: true, title: 'Dark Mode', description: 'Apply a theme with dark colors' },
+            { id: 1, type: 'switch', value: false, title: 'Dark Mode', description: 'Apply a theme with dark colors' },
             { id: 2, type: 'switch', value: false, title: 'Bordered Theme', description: 'Apply borders to the theme' },
         ]
     },
