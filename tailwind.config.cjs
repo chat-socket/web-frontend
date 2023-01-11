@@ -36,13 +36,9 @@ module.exports = {
         13: '160px',
       },
 
-      fontFamily: {
-        sans: ['Open Sans', 'sans-serif'],
-        display: ['Fredoka']
-      },
-
       borderRadius: {
         'none': '0',
+        'xs': '4px',
         'sm': '8px',
         DEFAULT: '12px',
         'lg': '20px',
