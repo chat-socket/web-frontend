@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import Access from "../views/Access.vue";
 import Home from "../views/Home.vue";
 import PasswordReset from "../views/PasswordReset.vue";
 import Index from "../components/index/Index.vue";
@@ -12,14 +11,9 @@ const routes = [
         component: Index,
     },
     {
-        path: "/home",
+        path: "/messaging",
         name: "Home",
         component: Home,
-    },
-    {
-        path: '/access/:method/',
-        name: "Access",
-        component: Access,
     },
     {
         path: '/reset/',

@@ -5,7 +5,7 @@
 <p>1. Clone the repository.</p>
 
 ```bash
-git clone https://github.com/demon-bixia/Avian.git
+git clone https://github.com/chat-socket/web-frontend.git
 ```
 
 <p>2. Install dependencies.</p>
