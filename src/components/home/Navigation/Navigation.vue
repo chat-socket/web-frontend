@@ -9,9 +9,11 @@ import useChatStore from "../../../stores/chat";
 
 import NavLink from "./NavLink.vue";
 import ProfileDropdown from "./ProfileDropdown.vue";
+import {useSettingsStore} from "../../../stores/settings";
 
 const auth = useAuthStore();
 const chat = useChatStore();
+const settings = useSettingsStore();
 
 const showDropdown = ref(false);
 
@@ -57,7 +59,7 @@ const handleActiveSidebarComponentChange = (value: string) => {
                         <div class="relative xs:block md:hidden">
                             <button id="small-profile-menu-button" @click="showDropdown = !showDropdown"
                                 class="bg-white rounded-full active:scale-110 focus:outline-none focus:scale-110 transition duration-200 ease-out"
-                                :style="{'box-shadow': !chat.settings[2].settings[0].value ? '0 2px 5px rgba(193, 202, 255, 0.5),2px 0 5px rgba(193, 202, 255, 0.5),-2px 0 5px rgba(193, 202, 255, 0.5),0 -2px 5px rgba(193, 202, 255, 0.5)': 'none'}"
+                                :style="{'box-shadow': !settings.isDarkMode ? '0 2px 5px rgba(193, 202, 255, 0.5),2px 0 5px rgba(193, 202, 255, 0.5),-2px 0 5px rgba(193, 202, 255, 0.5),0 -2px 5px rgba(193, 202, 255, 0.5)': 'none'}"
                                 :aria-expanded="showDropdown" aria-controls="profile-menu"
                                 aria-label="toggle profile menu">
                                 <div id="user-avatar" :style="{ backgroundImage: `url(${auth.user?.avatar})`}"
@@ -93,8 +95,8 @@ const handleActiveSidebarComponentChange = (value: string) => {
                 <ul>
                     <!--toggle dark mode button-->
                     <li>
-                        <NavLink :icon="chat.settings[2].settings[0].value ? SunIcon : MoonIcon" title="Night mode"
-                            @click="chat.settings[2].settings[0].value = !chat.settings[2].settings[0].value" />
+                        <NavLink :icon="settings.isDarkMode ? SunIcon : MoonIcon" title="Night mode"
+                            @click="settings.switchTheme()" />
                     </li>
                     <!--settings button-->
                     <li>
@@ -113,7 +115,7 @@ const handleActiveSidebarComponentChange = (value: string) => {
                 <!--dropdown button-->
                 <button id="profile-menu-button" @click="showDropdown = !showDropdown"
                     class="bg-white rounded-full active:scale-110 focus:outline-none focus:scale-110 transition duration-200 ease-out"
-                    :style="{'box-shadow': !chat.settings[2].settings[0].value ? '0 2px 5px rgba(193, 202, 255, 0.5),2px 0 5px rgba(193, 202, 255, 0.5),-2px 0 5px rgba(193, 202, 255, 0.5),0 -2px 5px rgba(193, 202, 255, 0.5)': 'none'}"
+                    :style="{'box-shadow': !settings.isDarkMode ? '0 2px 5px rgba(193, 202, 255, 0.5),2px 0 5px rgba(193, 202, 255, 0.5),-2px 0 5px rgba(193, 202, 255, 0.5),0 -2px 5px rgba(193, 202, 255, 0.5)': 'none'}"
                     :aria-expanded="showDropdown" aria-controls="profile-menu" aria-label="toggle profile menu">
                     <div id="user-avatar" :style="{ backgroundImage: `url(${auth.user?.avatar})`}"
                         class="w-7 h-7 rounded-full bg-cover bg-center">

@@ -7,14 +7,16 @@ import { updateAccount } from "../../../../stores/fakeData";
 import { BooleanValue, FileOrTextValue, Value } from "./types";
 
 import AccordionElement from "./AccordionElement.vue";
+import {useSettingsStore} from "../../../../stores/settings";
 
 const chat = useChatStore();
+const settings = useSettingsStore();
 
 // array that contains values that determine whether the accordion is collapsed or opened.
-const accordionState: Ref<boolean[]> = ref((chat.settings as Settings[]).map(() => true));
+const accordionState: Ref<boolean[]> = ref((settings.preferences).map(() => true));
 
 // array contains the values that determine wheter the accordion is loading or not.
-const accordionLoading: Ref<boolean[]> = ref((chat.settings as Settings[]).map(() => false));
+const accordionLoading: Ref<boolean[]> = ref((settings.preferences).map(() => false));
 
 // collapse and expand the accordion element.
 const handleToggleElement = (index: number) => {
@@ -38,32 +40,9 @@ const toggleLoadingState = (index: number) => {
     });
 };
 
-// update the settings state.
-const updateSettings = (event: Value) => {
-    let newSettings = [...chat.settings];
-
-    chat.settings = newSettings.map((settingGroup) => {
-        if (settingGroup.id === event.groupId) {
-
-            settingGroup.settings.map((setting) => {
-                if (setting.id === event.id) {
-                    setting.value = event.value;
-                    return setting;
-                } else {
-                    return setting;
-                }
-            });
-
-            return settingGroup;
-        } else {
-            return settingGroup;
-        }
-    });
-};
-
 // event that toggles the setting switch.
 const handleToggleSwitch = (event: BooleanValue) => {
-    updateSettings(event);
+    settings.update(event.groupId, event.id, event.value);
 };
 
 // event that fires when save settings is click
@@ -76,14 +55,14 @@ const handleSaveSettings = async (event: FileOrTextValue[], index: number) => {
     toggleLoadingState(index);
 
     for (let setting of event) {
-        updateSettings(setting);
+      settings.update(setting.groupId, setting.id, setting.value);
     }
 };
 </script>
 
 <template>
     <div role="list" aria-label="Settings Accordion Control Group Buttons" class="h-full ">
-        <AccordionElement v-for="(settingsGroup, index) in chat.settings" :settings-group="settingsGroup"
+        <AccordionElement v-for="(settingsGroup, index) in settings.preferences" :settings-group="settingsGroup"
             :collapsed="accordionState[index]" :loading="accordionLoading[index]" :index="index"
             :handle-toggle-element="handleToggleElement" :handleToggleSwitch="handleToggleSwitch"
             :handle-save-settings="handleSaveSettings" :key="index" />

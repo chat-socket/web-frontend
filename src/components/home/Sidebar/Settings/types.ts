@@ -6,7 +6,7 @@ export interface TextValue {
     groupId: number
 }
 
-export interface FileValue { value: File | undefined, id: number, groupId: number, }
+export interface FileValue { value: File, id: number, groupId: number, }
 
 export interface BooleanValue {
     value: boolean

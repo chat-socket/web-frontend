@@ -14,6 +14,7 @@ import AttachmentsModal from "../../modals/AttachmentsModal/AttachmentsModal.vue
 import SelectedReply from "./SelectedReply.vue";
 
 import '../../../../../node_modules/vue3-emoji-picker/dist/style.css'
+import {useSettingsStore} from "../../../../stores/settings";
 
 const props = defineProps<{
     activeConversation?: Conversation,
@@ -22,6 +23,7 @@ const props = defineProps<{
 }>();
 
 const chat = useChatStore();
+const settings = useSettingsStore();
 
 // the content of the message
 const content: Ref<string | null> = ref(null);
@@ -80,7 +82,7 @@ const handleClickOutside = (event: Event) => {
                     class="resize-none py-[30px] w-full mr-5 outline-none text-sm text-black opacity-60 
                     dark:text-white dark:opacity-70 font-normal leading-4 tracking-[0.16px] placeholder:text-black 
                     placeholder:opacity-50 dark:placeholder:text-white dark:placeholder:opacity-70 bg-transparent"
-                    :class="chat.settings[2].settings[0].value ? ['scrollbar-dark'] : ['scrollbar']"></textarea>
+                    :class="settings.isDarkMode ? ['scrollbar-dark'] : ['scrollbar']"></textarea>
             </div>
 
             <!--cancel recording button-->

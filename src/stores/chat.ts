@@ -68,20 +68,6 @@ export interface Notification {
     message: string,
 };
 
-export interface Setting {
-    id: number,
-    type: string,
-    value?: boolean | string | File,
-    title: string,
-    description?: string,
-};
-
-export interface Settings {
-    id: number,
-    title: string,
-    description?: string,
-    settings: Setting[],
-};
 
 export interface Call {
     type: string,
@@ -106,7 +92,6 @@ const useChatStore = defineStore("chat", () => {
     const notifications: Ref<Notification[] | undefined> = ref(NOTIFICATIONS); // not fetched but updated
     const archivedConversations: Ref<Conversation[] | undefined> = ref(ARCHIVE); // not fetched
     const calls: Ref<Call[] | undefined> = ref(CALLS); // not fetched
-    const settings: Ref<Settings[]> = ref(storage.settings || DefaultSettings); // not fetched
     const activeCall: Ref<Call | null> = ref(ACTIVECALL) //not fetched
 
     // ui refs
@@ -164,7 +149,6 @@ const useChatStore = defineStore("chat", () => {
         notifications,
         archivedConversations,
         calls,
-        settings,
         activeCall,
 
         // ui refs

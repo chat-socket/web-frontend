@@ -6,13 +6,14 @@ import PrimaryButton from "../../../reusables/PrimaryButton.vue";
 import TextInput from "../../../reusables/TextInput.vue";
 import Modal from "../Modal.vue";
 import Attachment from "./Attachment.vue";
+import {useSettingsStore} from "../../../../stores/settings";
 
 const props = defineProps<{
     open: boolean,
     closeModal: () => void,
 }>();
 
-const chat = useChatStore();
+const settings = useSettingsStore();
 </script>
 
 <template>
@@ -21,7 +22,7 @@ const chat = useChatStore();
             <div class="w-[400px] bg-white dark:bg-gray-800 rounded py-6">
                 <!--attachments list-->
                 <div class="max-h-[140px] overflow-y-scroll "
-                    :class="chat.settings[2].settings[0].value ? ['scrollbar-dark'] : ['scrollbar']">
+                    :class="settings ? ['scrollbar-dark'] : ['scrollbar']">
                     <Attachment v-for="(attachment, index) in ATTACHMENTS" :attachment="attachment" :key="index" />
                 </div>
 
