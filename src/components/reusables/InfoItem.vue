@@ -20,22 +20,22 @@ const props = defineProps<{
     <button v-if="props.link" class="group w-full flex items-center outline-none"
         @click="$emit('active-page-change', {tabName: 'members', animationName: 'slide-left'})">
         <component :is="props.icon" class="w-[20px] h-[20px] mr-6 0 transition-all duration-200"
-            :class="props.danger ? ['text-red-300', 'group-hover:text-red-400', 'dark:text-red-400', 'opacity-100']: ['text-gray-300', 'group-hover:text-indigo-300', 'group-active:text-indigo-40']" />
+            :class="props.danger ? ['text-red-300', 'group-hover:text-red-400', 'dark:text-red-400', 'opacity-100']: ['text-gray-300', 'group-hover:text-emerald-300', 'group-active:text-emerald-40']" />
 
         <div class="grow flex justify-start items-start">
             <Typography variant="body-2" class="transition-all duration-200"
-                :class="props.danger ? ['text-red-300' ,'group-hover:text-red-400',  'dark:text-red-400', 'opacity-100']: ['group-hover:text-indigo-300 ','group-hover:opacity-100' ,'group-active:text-indigo-400']">
+                :class="props.danger ? ['text-red-300' ,'group-hover:text-red-400',  'dark:text-red-400', 'opacity-100']: ['group-hover:text-emerald-300 ','group-hover:opacity-100' ,'group-active:text-emerald-400']">
                 {{props.title}}
             </Typography>
         </div>
 
         <ChevronRightIcon v-if="props.chevron"
-            class="w-[20px] h-[20px] text-gray-300 group-hover:text-indigo-300 group-active:text-indigo-400 duration-200" />
+            class="w-[20px] h-[20px] text-gray-300 group-hover:text-emerald-300 group-active:text-emerald-400 duration-200" />
     </button>
 
     <!--info item-->
     <div v-else class="w-full  flex items-center">
-        <component :is="props.icon" class="w-[20px] h-[20px] mr-6 text-gray-300 group-hover:text-indigo-300" />
+        <component :is="props.icon" class="w-[20px] h-[20px] mr-6 text-gray-300 group-hover:text-emerald-300" />
 
         <div class="grow flex justify-start items-start">
             <Typography variant="body-2">

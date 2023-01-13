@@ -13,7 +13,7 @@ const props = defineProps<{
 
 <template>
     <button
-        class="w-full p-5 flex hover:bg-indigo-50 active:bg-indigo-100 dark:hover:bg-gray-600 dark:focus:bg-gray-600 outline-none transition-all duration-300">
+        class="w-full p-5 flex hover:bg-emerald-50 active:bg-emerald-100 dark:hover:bg-gray-600 dark:focus:bg-gray-600 outline-none transition-all duration-300">
         <!--icon-->
         <div class="w-8 h-8 mr-4 flex justify-center items-center rounded-full bg-gray-50 dark:bg-gray-500">
             <PhotoIcon class="h-5 w-5 text-gray-500 dark:text-white dark:text-opacity-70"

@@ -150,7 +150,7 @@ const isNumber = (attachment: Attachment, number: number, largerThan?: boolean) 
                         <button c
                             class="w-8 h-8 mr-4  flex justify-center rounded-full outline-none items-center duration-200"
                             :class="props.self ? ['bg-white', 'hover:bg-gray-100','active:bg-gray-200'] 
-                            : ['bg-indigo-50', 'hover:bg-indigo-100', 'active:bg-indigo-200', 'dark:bg-gray-400', 'dark:hover:bg-gray-300', 'dark:focus:bg-gray-300', 'dark:active:bg-gray-200'] ">
+                            : ['bg-emerald-50', 'hover:bg-emerald-100', 'active:bg-emerald-200', 'dark:bg-gray-400', 'dark:hover:bg-gray-300', 'dark:focus:bg-gray-300', 'dark:active:bg-gray-200'] ">
                             <ArrowDownTrayIcon class="stroke-2 h-5 w-5 "
                                 :class="props.self ? ['text-black', 'text-opacity-50'] : ['text-blue-500', 'dark:text-gray-50']" />
                         </button>

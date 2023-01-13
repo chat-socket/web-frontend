@@ -71,13 +71,13 @@ const handleMouseUp = () => {
 
                 <!--blue fill-->
                 <div ref="fill" class="absolute h-2 w-0 rounded-full transition-all duration-100"
-                    :class="props.self ? ['bg-white'] : ['bg-indigo-300']"
+                    :class="props.self ? ['bg-white'] : ['bg-emerald-400']"
                     :style="{'width': props.initialValue?.toString() || '100%'}"> </div>
 
                 <!--dragable thumb-->
                 <div ref="thumb" @mousedown.prevent="handleDrag"
                     class="absolute top-[-1px] h-4 w-4 -ml-2 flex items-center justify-center border rounded-full cursor-pointer active:scale-110 focus:scale-110 transition-all duration-100"
-                    :class="props.self ? ['bg-white', 'border-white', 'hover:bg-gray-50', 'foucs:bg-gray-50', 'active:bg-gray-50'] : ['bg-indigo-300', 'border-indigo-300', 'hover:bg-indigo-400', 'foucs:bg-indigo-400', 'active:bg-indigo-400']"
+                    :class="props.self ? ['bg-white', 'border-white', 'hover:bg-gray-50', 'foucs:bg-gray-50', 'active:bg-gray-50'] : ['bg-emerald-400', 'border-indigo-300', 'hover:bg-emerald-400', 'foucs:bg-emerald-400', 'active:bg-emerald-400']"
                     unselectable="on" onselectstart="return false;"
                     :style="{'left': props.initialValue?.toString() || '100%'}">
                     <div class="relative -mt-2 w-1">

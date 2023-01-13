@@ -56,9 +56,9 @@ const lastMessage = computed(() => props.conversation.messages[props.conversatio
     <div>
         <button :aria-label="'conversation with' + getName(props.conversation) " tabindex="0"
             v-click-outside="contextConfig" @contextmenu.prevent="handleShowContextMenu"
-            @click="handleSelectConversation" class="w-full h-[92px] px-5 py-6 mb-3 flex rounded focus:bg-indigo-50  dark:active:bg-gray-600 dark:focus:bg-gray-600 dark:hover:bg-gray-600 
-            hover:bg-indigo-50 active:bg-indigo-100 focus:outline-none transition duration-500 ease-out"
-            :class="{'md:bg-indigo-50': props.isActive, 'md:dark:bg-gray-600': props.isActive}">
+            @click="handleSelectConversation" class="w-full h-[92px] px-5 py-6 mb-3 flex rounded focus:bg-emerald-50  dark:active:bg-gray-600 dark:focus:bg-gray-600 dark:hover:bg-gray-600
+            hover:bg-emerald-50 active:bg-emerald-100 focus:outline-none transition duration-500 ease-out"
+            :class="{'md:bg-emerald-50': props.isActive, 'md:dark:bg-gray-600': props.isActive}">
 
             <!--profile image-->
             <div class="mr-4">

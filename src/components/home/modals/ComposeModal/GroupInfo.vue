@@ -22,7 +22,7 @@ import TextInput from '../../../reusables/TextInput.vue';
             <div class="grow"></div>
             <PrimaryButton
                 @click="$emit('active-page-change', { tabName: 'group-members', animationName: 'slide-left' })"
-                class="px-5 bg-indigo-400 hover:bg-indigo-500 active:bg-indigo-500">
+                class="px-5 bg-emerald-400 hover:bg-emerald-500 active:bg-emerald-500">
                 Next
             </PrimaryButton>
         </div>

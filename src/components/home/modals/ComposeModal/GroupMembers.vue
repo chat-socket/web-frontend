@@ -29,14 +29,14 @@ const chat = useChatStore();
             <div class="grow"></div>
             <!--previous button-->
             <button @click="$emit('active-page-change', { tabName: 'group-info', animationName: 'slide-right' })" class="px-5 mr-4 text-black opacity-60 rounded-sm bg-white 
-            hover:bg-indigo-50 active:bg-indigo-100 dark:bg-gray-800 
+            hover:bg-emerald-50 active:bg-emerald-100 dark:bg-gray-800
             dark:active:bg-gray-600 dark:focus:bg-gray-600 dark:text-white dark:opacity-70 
              duration-200 outline-none focus:outline-none">
                 Previous
             </button>
 
             <!--next button-->
-            <PrimaryButton class="px-5 bg-indigo-400 hover:bg-indigo-500 active:bg-indigo-500">
+            <PrimaryButton class="px-5 bg-emerald-400 hover:bg-emerald-500 active:bg-emerald-500">
                 Finish
             </PrimaryButton>
         </div>

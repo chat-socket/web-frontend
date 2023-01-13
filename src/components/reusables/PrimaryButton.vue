@@ -15,11 +15,11 @@ const buttonClasses = computed(() => {
 
     // structure
     if (props.variant === 'primary' || !props.variant)
-        classes = [...classes, 'bg-indigo-300', 'dark:bg-indigo-400', 'active:ring'];
+        classes = [...classes, 'bg-emerald-400', 'dark:bg-emerald-500', 'active:ring'];
 
     // color
     if ((props.variant === 'gohst' && props.color === 'primary') || (props.variant === 'gohst' && !props.color))
-        classes = [...classes, 'hover:bg-indigo-50', 'hover:text-indigo-400', 'active:bg-indigo-100', 'dark:hover:bg-gray-600'];
+        classes = [...classes, 'hover:bg-emerald-50', 'hover:text-emerald-400', 'active:bg-emerald-100', 'dark:hover:bg-gray-600'];
 
     else if (props.variant === 'gohst' && props.color === 'danger')
         classes = [...classes, 'hover:bg-red-50', 'active:bg-red-100', 'dark:hover:bg-red-500', 'dark:active:bg-red-400',];
@@ -32,12 +32,12 @@ const buttonClasses = computed(() => {
 
     else if (props.variant === 'outlined' && (props.color === 'primary' || !props.color))
         classes = [...classes, 'bg-opacity-0', 'border', 'border-gray-100',
-            'hover:border-indigo-300', 'hover:bg-indigo-300',
-            'dark:hover:border-indigo-400', 'dark:hover:bg-indigo-400',
-            'dark:focus:border-indigo-400', 'dark:focus:bg-indigo-400',
+            'hover:border-indigo-300', 'hover:bg-emerald-400',
+            'dark:hover:border-indigo-400', 'dark:hover:bg-emerald-400',
+            'dark:focus:border-indigo-400', 'dark:focus:bg-emerald-400',
 
             'active:ring', 'active:ring-indigo-100',
-            'focus:ring', 'focus:ring-indigo-100', 'focus:bg-indigo-300'];
+            'focus:ring', 'focus:ring-indigo-100', 'focus:bg-emerald-400'];
 
     return classes;
 });

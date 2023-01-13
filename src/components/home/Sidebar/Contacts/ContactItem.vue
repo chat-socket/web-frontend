@@ -23,8 +23,8 @@ const auth = useAuthStore();
         <component :is="props.variant === 'card' ? 'div' : 'a'"
             @click="props.variant === 'card' ? () => {} :$emit('contactSelected', props.contact)" href="#"
             class="w-full p-5 flex transition duration-200 ease-out outline-none" :class="{
-            'hover:bg-indigo-50 active:bg-indigo-100 focus:bg-indigo-50 dark:hover:bg-gray-600 dark:focus:bg-gray-600':  props.variant !== 'card', 
-            'bg-indigo-50 dark:bg-gray-600': props.active
+            'hover:bg-emerald-50 active:bg-emerald-100 focus:bg-emerald-50 dark:hover:bg-gray-600 dark:focus:bg-gray-600':  props.variant !== 'card',
+            'bg-emerald-50 dark:bg-gray-600': props.active
             }">
 
             <!--profile image-->

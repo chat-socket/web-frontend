@@ -40,7 +40,7 @@ const props = defineProps<{
         <!--action buttons-->
         <div class="flex">
             <IconButton class="w-7 h-7 mr-2">
-                <ArrowPathRoundedSquareIcon class="w-[16px] h-[16px] text-gray-300 group-hover:text-indigo-300" />
+                <ArrowPathRoundedSquareIcon class="w-[16px] h-[16px] text-gray-300 group-hover:text-emerald-300" />
             </IconButton>
             <IconButton class="w-7 h-7">
                 <TrashIcon class="w-[16px] h-[16px] text-gray-300 group-hover:text-red-300" />

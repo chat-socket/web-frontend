@@ -21,13 +21,13 @@ const handleTogglePlay = () => {
         <button @click="handleTogglePlay"
             class="p-4 mr-4 flex justify-center items-center rounded-full outline-none   transition-all duration-200"
             :class="props.self ? ['bg-white', 'hover:bg-gray-100', 'active:bg-gray-200'] 
-            : ['bg-indigo-100', 'hover:bg-indigo-200', 'active:bg-indigo-300', 'dark:bg-gray-400',
+            : ['bg-emerald-100', 'hover:bg-emerald-200', 'active:bg-emerald-400', 'dark:bg-gray-400',
             'dark:hover:bg-gray-300', 'dark:focus:bg-gray-300', 'dark:active:bg-gray-300']"
             :aria-label="playing ? 'pause': 'play'">
             <PauseIcon v-if="playing" class="w-5 h-5 stroke-1"
-                :class="props.self ? ['text-gray-500'] : ['text-indigo-500']" />
+                :class="props.self ? ['text-gray-500'] : ['text-emerald-500']" />
             <PlayIcon v-else class="w-5 h-5 stroke-1"
-                :class="props.self ? ['text-gray-500'] : ['text-indigo-500', 'dark:text-gray-50']" />
+                :class="props.self ? ['text-gray-500'] : ['text-emerald-500', 'dark:text-gray-50']" />
         </button>
 
         <div class="w-12 mr-4">

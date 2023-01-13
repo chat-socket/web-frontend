@@ -34,7 +34,7 @@ const handleOpenInfoModal = () => {
             class="w-full h-[92px] px-5 py-6 mb-3 flex rounded  focus:outline-none transition duration-500 ease-out"
             :class="props.active 
             ? ['border border-dashed border-green-100 dark:border-green-800', ] 
-            : ['focus:bg-indigo-50  dark:active:bg-gray-600 dark:focus:bg-gray-600 dark:hover:bg-gray-600 hover:bg-indigo-50 active:bg-indigo-100']"
+            : ['focus:bg-emerald-50  dark:active:bg-gray-600 dark:focus:bg-gray-600 dark:hover:bg-gray-600 hover:bg-emerald-50 active:bg-emerald-100']"
             tabindex="0">
 
             <!--profile images-->
@@ -88,7 +88,7 @@ const handleOpenInfoModal = () => {
                 <div>
                     <!--recording length-->
                     <Typography v-if="props.active" variant="body-2" no-color
-                        class="flex justify-start items-center text-indigo-300">
+                        class="flex justify-start items-center text-emerald-300">
                         {{props.call.length}}
                     </Typography>
 

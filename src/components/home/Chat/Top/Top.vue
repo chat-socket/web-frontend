@@ -81,7 +81,7 @@ const handleCloseVoiceCallModal = (endCall: boolean) => {
             <div class="group mr-4 md:hidden">
                 <IconButton class="w-7 h-7" @click="handleCloseConversation">
                     <ChevronLeftIcon aria-label="close conversation"
-                        class="w-[20px] h-[20px] text-gray-300 group-hover:text-indigo-300" />
+                        class="w-[20px] h-[20px] text-gray-300 group-hover:text-emerald-300" />
                 </IconButton>
             </div>
 
@@ -110,7 +110,7 @@ const handleCloseVoiceCallModal = (endCall: boolean) => {
             <div class="flex" :class="{'hidden': chat.status === 'loading'}">
                 <!--search button-->
                 <IconButton @click="openSearch = true" aria-label="Search messages" class="group w-7 h-7 mr-3">
-                    <MagnifyingGlassIcon class="w-[20px] h-[20px] text-gray-300 group-hover:text-indigo-300" />
+                    <MagnifyingGlassIcon class="w-[20px] h-[20px] text-gray-300 group-hover:text-emerald-300" />
                 </IconButton>
 
                 <div class="relative">
@@ -119,7 +119,7 @@ const handleCloseVoiceCallModal = (endCall: boolean) => {
                         class="open-top-menu group w-7 h-7" :aria-expanded="showDropdown"
                         aria-controls="conversation-menu" aria-label="toggle conversation menu">
                         <EllipsisVerticalIcon
-                            class="open-top-menu w-[20px] h-[20px] text-gray-300 group-hover:text-indigo-300" />
+                            class="open-top-menu w-[20px] h-[20px] text-gray-300 group-hover:text-emerald-300" />
                     </IconButton>
 
                     <!--dropdown menu-->

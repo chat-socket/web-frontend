@@ -43,7 +43,7 @@ import Typography from "../../reusables/Typography.vue";
             <!--bottom text-->
             <div class="flex justify-center">
                 <Typography variant="body-2">Don’t have an account ?
-                    <RouterLink to="/access/sign-up/" class="text-indigo-400 opacity-100">
+                    <RouterLink to="/access/sign-up/" class="text-emerald-400 opacity-100">
                         Sign up
                     </RouterLink>
                 </Typography>

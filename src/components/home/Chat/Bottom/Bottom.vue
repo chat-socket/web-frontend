@@ -70,11 +70,11 @@ const handleClickOutside = (event: Event) => {
             :class="recording ? ['justify-between'] : []">
             <!--select attachments button-->
             <IconButton @click="openAttachmentsModal = true" v-if="!recording" class="group w-7 h-7 mr-5 ">
-                <PaperClipIcon class="w-[20px] h-[20px] text-gray-300 group-hover:text-indigo-300 " />
+                <PaperClipIcon class="w-[20px] h-[20px] text-gray-300 group-hover:text-emerald-300 " />
             </IconButton>
 
             <!--recording timer-->
-            <Typography v-if="recording" variant="body-1" no-color class="text-indigo-300">00:11</Typography>
+            <Typography v-if="recording" variant="body-1" no-color class="text-emerald-300">00:11</Typography>
 
             <!--message textarea-->
             <div class="grow mr-5" v-if="!recording">
@@ -98,8 +98,8 @@ const handleClickOutside = (event: Event) => {
                 <IconButton @click="showPicker = !showPicker" class="toggle-picker-button group w-7 h-7 mr-5"
                     aria-label="toggle emoji picker">
                     <XCircleIcon v-if="showPicker"
-                        class=" w-[20px] h-[20px] text-gray-300 group-hover:text-indigo-300" />
-                    <FaceSmileIcon v-else class="w-[20px] h-[20px] text-gray-300 group-hover:text-indigo-300" />
+                        class=" w-[20px] h-[20px] text-gray-300 group-hover:text-emerald-300" />
+                    <FaceSmileIcon v-else class="w-[20px] h-[20px] text-gray-300 group-hover:text-emerald-300" />
                 </IconButton>
 
                 <!--emoji picker-->
@@ -117,15 +117,15 @@ const handleClickOutside = (event: Event) => {
             <!--send message button-->
             <button v-if="content && (content as string).length > 0"
                 class="group w-7 h-7 flex justify-center items-center outline-none rounded-full focus:outline-none focus:bg-gray-50 hover:bg-gray-50 transition-all duration-200">
-                <PaperAirplaneIcon class="w-[20px] h-[20px] text-gray-300 group-hover:text-indigo-300" />
+                <PaperAirplaneIcon class="w-[20px] h-[20px] text-gray-300 group-hover:text-emerald-300" />
             </button>
 
             <!--recording button-->
             <div v-else>
                 <IconButton v-if="recording" @click="handleToggleRecording" aria-label="start recording"
-                    class="relative group w-7 h-7 flex justify-center items-center outline-none rounded-full  bg-indigo-300 hover:bg-green-300 dark:hover:bg-green-400  dark:focus:bg-green-400  focus:outline-none transition-all duration-200">
+                    class="relative group w-7 h-7 flex justify-center items-center outline-none rounded-full  bg-emerald-400 hover:bg-green-300 dark:hover:bg-green-400  dark:focus:bg-green-400  focus:outline-none transition-all duration-200">
                     <span
-                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-300 group-hover:bg-green-300 opacity-40">
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 group-hover:bg-green-300 opacity-40">
                     </span>
 
                     <MicrophoneIcon class="w-[20px] h-[20px] text-white group-hover:hidden" />
@@ -133,7 +133,7 @@ const handleClickOutside = (event: Event) => {
                 </IconButton>
 
                 <IconButton v-else @click="handleToggleRecording" aria-label="finish recording" class="group w-7 h-7 ">
-                    <MicrophoneIcon class="w-[20px] h-[20px] text-gray-300 group-hover:text-indigo-300" />
+                    <MicrophoneIcon class="w-[20px] h-[20px] text-gray-300 group-hover:text-emerald-300" />
                 </IconButton>
             </div>
         </div>

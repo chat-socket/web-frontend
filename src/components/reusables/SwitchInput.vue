@@ -44,7 +44,7 @@ const handleToggleSwitchOnEnter = (event: KeyboardEvent) => {
 
                     <label @click="$emit('switchClicked', !props.value)" @keydown="handleToggleSwitchOnEnter" :for="id"
                         class="block w-7 h-5 rounded-full outline-none cursor-pointer"
-                        :class="{'bg-indigo-400': value, 'bg-gray-300 dark:bg-gray-600': !value}" tabindex="-1">
+                        :class="{'bg-emerald-400': value, 'bg-gray-300 dark:bg-gray-600': !value}" tabindex="-1">
                     </label>
                 </div>
             </div>

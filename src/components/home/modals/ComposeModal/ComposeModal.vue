@@ -60,12 +60,12 @@ const activeTab = computed(() => {
                     <div class="flex items-center p-2 bg-gray-50 rounded-sm dark:bg-gray-700">
                         <button @click="switchTab('contacts')" class="basis-1/2 p-4 rounded-sm  text-md outline-none 
                             leading-4 tracking-[0.16px] transition-all duration-200 focus:outline-none mr-1"
-                            :class="activeTabName === 'contacts' ? ['bg-indigo-400', 'text-white'] : ['text-black', 'opacity-60',  'dark:text-white', 'dark:opacity-70']">
+                            :class="activeTabName === 'contacts' ? ['bg-emerald-400', 'text-white'] : ['text-black', 'opacity-60',  'dark:text-white', 'dark:opacity-70']">
                             Contact
                         </button>
                         <button @click="switchTab('group')" class="basis-1/2 p-4 rounded-sm text-md 
                             leading-4 tracking-[0.16px] transition-all duration-200 outline-none focus:outline-none"
-                            :class="activeTabName === 'group' ? ['bg-indigo-400', 'text-white'] : ['text-black', 'opacity-60', 'dark:text-white', 'dark:opacity-70']">
+                            :class="activeTabName === 'group' ? ['bg-emerald-400', 'text-white'] : ['text-black', 'opacity-60', 'dark:text-white', 'dark:opacity-70']">
                             Group
                         </button>
                     </div>

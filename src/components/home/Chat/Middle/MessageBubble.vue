@@ -83,7 +83,7 @@ const hideAvatar = () => {
                 <!--bubble-->
                 <div @click="handleCloseContextMenu" v-click-outside="contextConfig"
                     @contextmenu.prevent="handleShowContextMenu"
-                    class="group max-w-[500px] p-5 rounded-b transition duration-500" :class="[props.self ? ['rounded-tl', 'ml-4', 'order-1', 'bg-indigo-300', 'dark:bg-indigo-400'] 
+                    class="group max-w-[500px] p-5 rounded-b transition duration-500" :class="[props.self ? ['rounded-tl', 'ml-4', 'order-1', 'bg-emerald-400', 'dark:bg-emerald-500']
                     : ['rounded-tr', 'mr-4', 'bg-gray-50', 'dark:bg-gray-600']]">
 
                     <!--reply to-->
@@ -95,7 +95,7 @@ const hideAvatar = () => {
                         v-if='(props.message as Message).content && (props.message as Message).type !== "recording"'
                         :class="props.self ? ['text-white'] : ['text-black', 'opacity-60', 'dark:text-white', 'dark:opacity-70']"
                         v-html="linkifyStr((props.message.content as string), {
-                        className: props.self ? 'text-black opacity-50' : 'text-indigo-500 dark:text-indigo-300', 
+                        className: props.self ? 'text-black opacity-50' : 'text-emerald-500 dark:text-emerald-300',
                         format: {url:(value) => value.length > 50 ? value.slice(0, 50) + `…` : value}
                         })" tabindex="0">
                     </Typography>

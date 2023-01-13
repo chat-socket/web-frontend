@@ -10,8 +10,8 @@ const props = defineProps<{
 </script>
 
 <template>
-    <button class="w-full p-5 flex outline-none hover:bg-indigo-100 focus:bg-indigo-100
-         active:bg-indigo-200 dark:hover:bg-gray-600 dark:focus:bg-gray-600 duration-200">
+    <button class="w-full p-5 flex outline-none hover:bg-emerald-100 focus:bg-emerald-100
+         active:bg-emerald-200 dark:hover:bg-gray-600 dark:focus:bg-gray-600 duration-200">
         <!--profile image-->
         <div class="mr-4">
             <div :style="{ backgroundImage: `url(${props.message.sender.avatar})`}"
