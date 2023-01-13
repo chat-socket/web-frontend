@@ -1,6 +1,7 @@
 import {defineStore} from "pinia";
-import { DefaultSettings } from "./defaultData";
+import settingsData from "../assets/data/settings.json";
 import {ref, Ref} from "vue";
+import {parseJSON} from "../utils";
 
 
 export interface Setting {
@@ -20,9 +21,8 @@ export interface Settings {
 
 export const useSettingsStore = defineStore('settings', {
     state: () => {
-        const storageSettings = JSON.parse(localStorage.getItem('settings') || '{}');
-        const settings: Ref<Settings[]> = ref(storageSettings || DefaultSettings) // not fetched
-
+        const storageSettings = parseJSON(localStorage.getItem('settings'));
+        const settings: Ref<Settings[]> = ref(storageSettings || settingsData.settings)
         return {
             preferences: settings
         }

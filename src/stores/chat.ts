@@ -2,7 +2,6 @@ import { defineStore } from "pinia";
 import type { Ref } from "vue";
 import { computed, ref } from "vue";
 
-import { DefaultSettings } from "./defaultData";
 import { ARCHIVE, CONTACTS, CONVERSATIONS, NOTIFICATIONS, CALLS, ACTIVECALL } from "./fakeData";
 
 export interface Contact {

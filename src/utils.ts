@@ -119,3 +119,10 @@ export const getCallName = (call: Call, full?: boolean, maxLength: number = 20) 
         return shortenText(callName, maxLength);
     }
 };
+
+export const parseJSON = (jsonText: string | null) => {
+    if (jsonText == null) {
+        return null;
+    }
+    return JSON.parse(jsonText);
+}
