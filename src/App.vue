@@ -1,14 +1,8 @@
 <script setup lang="ts">
-import { computed } from "vue";
-
-import useChatStore from './stores/chat';
 
 import FadeTransition from './components/reusables/transitions/FadeTransition.vue';
-import useAuthStore from "./stores/auth";
 import {useSettingsStore} from "./stores/settings";
 
-const chat = useChatStore();
-const auth = useAuthStore();
 const settings = useSettingsStore();
 
 // fix height on mobile screens

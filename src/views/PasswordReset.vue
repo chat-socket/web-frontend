@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import ResetForm from '../components/password_reset/ResetForm.vue';
-import useChatStore from '../stores/chat';
 
 </script>
     

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import IndexNavbar from "./IndexNavbar.vue";
+import IndexNavbar from "./AboutNavbar.vue";
 
 </script>
 
