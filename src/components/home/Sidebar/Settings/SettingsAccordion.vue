@@ -48,8 +48,6 @@ const handleToggleSwitch = (event: BooleanValue) => {
 const handleSaveSettings = async (event: FileOrTextValue[], index: number) => {
     toggleLoadingState(index);
 
-    await updateAccount();
-
     toggleLoadingState(index);
 
     for (let setting of event) {

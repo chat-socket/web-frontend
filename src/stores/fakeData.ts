@@ -14,31 +14,6 @@ export const ACTIVECALL = {
     admins: ['glmanhtu@gmail.com'],
 };
 
-const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
-
-export const fetchData = async () => {
-    await delay(2000);
-
-    return await {
-        data: {
-            contacts: CONTACTS,
-            conversations: CONVERSATIONS,
-            notifications: NOTIFICATIONS,
-            archivedConversations: ARCHIVE,
-        }
-    };
-};
-
-export const updateAccount = async () => {
-    await delay(4000);
-
-    return await {
-        data: {
-            detail: 'Your account has been updated successfully',
-        }
-    };
-};
-
 export const ATTACHMENTS = [
     { id: 6, type: 'image', name: 'forest.jpg', size: '21 MB', url: 'https://images.unsplash.com/photo-1664021975758-78d83898225d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxOXx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60', },
     { id: 7, type: 'image', name: 'pumkins.jpg', size: '22 MB', url: 'https://images.unsplash.com/photo-1664031315855-955dbca83172?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80', },
