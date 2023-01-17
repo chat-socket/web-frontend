@@ -2,7 +2,6 @@
 import type { Ref } from "vue";
 import { ref } from "vue";
 
-import { updateAccount } from "../../../../stores/fakeData";
 import { BooleanValue, FileOrTextValue, Value } from "./types";
 
 import AccordionElement from "./AccordionElement.vue";
