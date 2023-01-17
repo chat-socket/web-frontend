@@ -1,0 +1,82 @@
+{
+   "calls":[
+      {
+         "id":1,
+         "type":"voice",
+         "status":"missed",
+         "direction":"incoming",
+         "date":"Dec 12, 2020",
+         "length":"01:12",
+         "members":[
+            "glmanhtu@gmail.com",
+            "ahmed@gmail.com"
+         ],
+         "admins":[
+            "glmanhtu@gmail.com"
+         ]
+      },
+      {
+         "id":2,
+         "type":"voice",
+         "status":"received",
+         "direction":"incoming",
+         "date":"Dec 12, 2020",
+         "length":"01:12",
+         "members":[
+            "glmanhtu@gmail.com",
+            "ahmed@gmail.com",
+            "allen@gmail.com",
+            "feng@gmail.com"
+         ],
+         "admins":[
+            "ahmed@gmail.com"
+         ]
+      },
+      {
+         "id":3,
+         "type":"voice",
+         "status":"sent",
+         "direction":"outgoing",
+         "date":"Dec 12, 2020",
+         "length":"01:12",
+         "members":[
+            "glmanhtu@gmail.com",
+            "dylan@gmail.com"
+         ],
+         "admins":[
+            "glmanhtu@gmail.com"
+         ]
+      },
+      {
+         "id":4,
+         "type":"voice",
+         "status":"missed",
+         "direction":"incoming",
+         "date":"Dec 12, 2020",
+         "length":"01:12",
+         "members":[
+            "glmanhtu@gmail.com",
+            "allen@gmail.com"
+         ],
+         "admins":[
+            "glmanhtu@gmail.com"
+         ]
+      },
+      {
+         "id":5,
+         "type":"voice",
+         "status":"sent",
+         "direction":"outgoing",
+         "date":"Dec 12, 2020",
+         "length":"01:12",
+         "members":[
+            "glmanhtu@gmail.com",
+            "evelyn@gmail.com",
+            "fung@gmail.com"
+         ],
+         "admins":[
+            "glmanhtu@gmail.com"
+         ]
+      }
+   ]
+}

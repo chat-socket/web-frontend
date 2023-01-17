@@ -3,7 +3,7 @@ import { EllipsisVerticalIcon, InformationCircleIcon, TrashIcon } from "@heroico
 import type { Ref } from "vue";
 import { ref } from 'vue';
 
-import { ContactGroup } from "../../../../stores/chat";
+import { ContactGroup } from "../../../../stores/contacts";
 import { getFullName } from "../../../../utils";
 
 import Dropdown from "../../../reusables/Dropdown.vue";

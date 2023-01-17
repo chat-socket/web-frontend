@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ChevronLeftIcon, EllipsisVerticalIcon, InformationCircleIcon, MagnifyingGlassIcon, NoSymbolIcon, PhoneIcon, ShareIcon } from "@heroicons/vue/24/outline";
+import { ChevronLeftIcon, EllipsisVerticalIcon, InformationCircleIcon, MagnifyingGlassIcon, NoSymbolIcon, PhoneIcon, ScaleIcon, ShareIcon } from "@heroicons/vue/24/outline";
 import { ref } from "vue";
 
-import useChatStore, { Call, Conversation } from "../../../../stores/chat";
+import { Conversation, useConversationsStore } from "../../../../stores/conversations";
+import { Call, useCallsStore } from "../../../../stores/calls";
 import { getAvatar, getName } from "../../../../utils";
 
 import Dropdown from "../../../reusables/Dropdown.vue";
@@ -19,7 +20,8 @@ const props = defineProps<{
     activeConversation?: Conversation,
 }>();
 
-const chat = useChatStore();
+const conversations = useConversationsStore();
+const calls = useCallsStore();
 
 const showDropdown = ref(false);
 
@@ -45,30 +47,30 @@ const handleClickOutside = (event: Event) => {
 
 // (event) close the selected conversation
 const handleCloseConversation = () => {
-    chat.conversationOpen = 'close';
+    conversations.conversationOpen = 'close';
 };
 
 // (event) open the voice call modal and expand call
 const handleOpenVoiceCallModal = () => {
-    chat.activeCall = ACTIVECALL;
-    chat.callMinimized = false;
+    calls.activeCall = ACTIVECALL;
+    calls.callMinimized = false;
 
     // wait for the transition to ongoing status to end
     setTimeout(() => {
-        chat.openVoiceCall = true;
+        calls.openVoiceCall = true;
     }, 300)
 };
 
 // (event) close the voice call modal and minimize the call
 const handleCloseVoiceCallModal = (endCall: boolean) => {
     if (endCall) {
-        chat.activeCall = null;
-        chat.callMinimized = false;
+        calls.activeCall = undefined;
+        calls.callMinimized = false;
     }
 
-    if (chat.openVoiceCall) {
-        chat.openVoiceCall = false;
-        chat.callMinimized = true;
+    if (calls.openVoiceCall) {
+        calls.openVoiceCall = false;
+        calls.callMinimized = true;
     }
 };
 </script>
@@ -85,7 +87,7 @@ const handleCloseVoiceCallModal = (endCall: boolean) => {
                 </IconButton>
             </div>
 
-            <div v-if="chat.status !== 'loading'" class="flex grow">
+            <div v-if="conversations.isLoaded" class="flex grow">
                 <!--avatar-->
                 <button class="mr-5 outline-none" @click="() => openInfo = true" aria-label="profile avatar">
                     <div :style="{ backgroundImage: `url(${getAvatar(activeConversation)})`}"
@@ -107,7 +109,7 @@ const handleCloseVoiceCallModal = (endCall: boolean) => {
                 </div>
             </div>
 
-            <div class="flex" :class="{'hidden': chat.status === 'loading'}">
+            <div class="flex" :class="{'hidden': !conversations.isLoaded}">
                 <!--search button-->
                 <IconButton @click="openSearch = true" aria-label="Search messages" class="group w-7 h-7 mr-3">
                     <MagnifyingGlassIcon class="w-[20px] h-[20px] text-gray-300 group-hover:text-emerald-300" />
@@ -165,9 +167,9 @@ const handleCloseVoiceCallModal = (endCall: boolean) => {
 
         <!--Contact info modal-->
         <ConversationInfoModal :open="openInfo" :closeModal="() => openInfo = false"
-            :conversation="(props.activeConversation as Conversation)" />
+            :conversation="(props.activeConversation as Conversation)"/>
 
         <!--voice call modal-->
-        <VoiceCallModal :open="chat.openVoiceCall" :close-modal="handleCloseVoiceCallModal" />
+        <VoiceCallModal :open="calls.openVoiceCall" :close-modal="handleCloseVoiceCallModal" />
     </div>
 </template>

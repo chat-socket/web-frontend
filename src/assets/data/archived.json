@@ -1,0 +1,36 @@
+{
+    "conversations":[
+       {
+          "id":3,
+          "type":"couple",
+          "contacts":[
+             "dawn@gmail.com",
+             "glmanhtu@gmail.com"
+          ],
+          "messages":[
+             {
+                "id":1,
+                "content":"Oh, ok good to know.",
+                "date":"4:00 pm",
+                "sender":"glmanhtu@gmail.com"
+             }
+          ]
+       },
+       {
+          "id":4,
+          "type":"couple",
+          "contacts":[
+             "allen@gmail.com",
+             "glmanhtu@gmail.com"
+          ],
+          "messages":[
+             {
+                "id":1,
+                "content":"Oh, ok good to know.",
+                "date":"4:00 pm",
+                "sender":"glmanhtu@gmail.com"
+             }
+          ]
+       }
+    ]
+ }

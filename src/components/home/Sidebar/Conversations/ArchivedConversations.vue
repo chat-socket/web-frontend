@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useChatStore, { Conversation as ConversationType } from "../../../../stores/chat";
+import { useConversationsStore, Conversation as ConversationType } from "../../../../stores/conversations";
 
 import Loading1 from "../../../reusables/loading/Loading1.vue";
 import SidebarHeader from "../SidebarHeader.vue";
@@ -10,20 +10,22 @@ import ConversationsList from "./ConversationsList.vue";
 import NoConversation from "../../../reusables/emptyStates/NoConversation.vue";
 import { getName } from "../../../../utils";
 
-const chat = useChatStore();
+const conversations = useConversationsStore();
 const searchText: Ref<string> = ref('');
 
 // (event) switch between the rendered conversations.
 const handleConversationChange = (conversationId: number) => {
-    chat.activeConversationId = conversationId;
-    chat.conversationOpen = 'open';
+    conversations.activeConversationId = conversationId;
+    conversations.conversationOpen = 'open';
 };
 
 // the filterd list of conversations.
-const filteredConversations: Ref<ConversationType[] | undefined> = ref(chat.archivedConversations);
+const filteredConversations: Ref<ConversationType[] | undefined> = ref(conversations.archivedConversations);
 
 watch([searchText], () => {
-    filteredConversations.value = chat.archivedConversations?.filter((conversation) => getName(conversation)?.toLowerCase().includes(searchText.value.toLowerCase()));
+    filteredConversations.value = conversations.archivedConversations?.filter(
+        (conversation) => getName(conversation)?.toLowerCase().includes(searchText.value.toLowerCase())
+    );
 });
 </script>
 
@@ -41,15 +43,15 @@ watch([searchText], () => {
         <!--conversations-->
         <div role="list" aria-label="conversations" class="w-full h-full scroll-smooth scrollbar-hidden"
             style="overflow-x:visible; overflow-y: scroll;">
-            <Loading1 v-if="chat.status === 'loading'  || chat.delayLoading" v-for="item in 6" />
+            <Loading1 v-if="!conversations.isLoaded" v-for="item in 6" />
 
             <div v-else>
                 <div
-                    v-if="chat.status === 'success' && !chat.delayLoading && (filteredConversations as ConversationType[]).length > 0">
+                    v-if="conversations.isLoaded && filteredConversations!.length > 0">
 
                     <FadeTransition>
                         <component :is="ConversationsList" :filtered-conversations="filteredConversations"
-                            :active-id="(chat.activeConversationId as number)"
+                            :active-id="(conversations.activeConversationId as number)"
                             :handle-conversation-change="handleConversationChange"
                             :key="'archive'" />
                     </FadeTransition>

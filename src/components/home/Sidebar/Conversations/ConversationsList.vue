@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Conversation as ConversationType } from '../../../../stores/chat';
+import { Conversation as ConversationType } from '../../../../stores/conversations';
 
 import Conversation from "./Conversation.vue";
 

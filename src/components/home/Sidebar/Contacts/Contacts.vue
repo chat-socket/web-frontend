@@ -3,7 +3,7 @@ import { UserPlusIcon } from "@heroicons/vue/24/outline";
 import type { Ref } from "vue";
 import { ref, watch } from "vue";
 
-import useChatStore, { Contact, ContactGroup } from "../../../../stores/chat";
+import { useContactsStore, Contact, ContactGroup } from "../../../../stores/contacts";
 
 import IconButton from "../../../reusables/IconButton.vue";
 import Loading2 from "../../../reusables/loading/Loading2.vue";
@@ -13,7 +13,7 @@ import SidebarHeader from "../SidebarHeader.vue";
 import ContactGroups from "./ContactGroups.vue";
 import NoContacts from "../../../reusables/emptyStates/NoContacts.vue";
 
-const chat = useChatStore();
+const contacts = useContactsStore();
 
 const searchText: Ref<string> = ref('');
 
@@ -23,11 +23,11 @@ const openModal = ref(false);
 const contactContainer: Ref<HTMLElement | null> = ref(null);
 
 // contact groups filtered by search text
-const filteredContactGroups: Ref<ContactGroup[] | undefined> = ref(chat.contactGroups);
+const filteredContactGroups: Ref<ContactGroup[] | undefined> = ref(contacts.contactGroups);
 
 // update the filtered contact groups based on the searchtext
 watch(searchText, () => {
-    filteredContactGroups.value = chat.contactGroups?.map((group) => {
+    filteredContactGroups.value = contacts.contactGroups?.map((group) => {
         let newGroup = { ...group };
 
         newGroup.contacts = newGroup.contacts.filter((contact) => {
@@ -64,10 +64,10 @@ watch(searchText, () => {
         <!--content-->
         <div ref="contactContainer" class="w-full h-full scroll-smooth scrollbar-hidden"
             style="overflow-x:visible; overflow-y: scroll;">
-            <Loading2 v-if="chat.status === 'loading'  || chat.delayLoading" v-for="item in 5" />
+            <Loading2 v-if="!contacts.isLoaded" v-for="item in 5" />
 
             <ContactGroups
-                v-else-if="chat.status === 'success' && !chat.delayLoading && (chat.contacts as Contact[])?.length > 0"
+                v-else-if="contacts.isLoaded && contacts.contacts.length > 0"
                 :contactGroups="filteredContactGroups"
                 :bottom-edge="(contactContainer as HTMLElement)?.getBoundingClientRect().bottom" />
 

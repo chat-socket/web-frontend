@@ -2,7 +2,7 @@
 import type { Ref } from "vue";
 import { ref } from "vue";
 
-import { Conversation as ConversationType, Message } from "../../../stores/chat";
+import { Conversation as ConversationType, Message } from "../../../stores/conversations";
 
 import Bottom from "./Bottom/Bottom.vue";
 import Middle from "./Middle/Middle.vue";

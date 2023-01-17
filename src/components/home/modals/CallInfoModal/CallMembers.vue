@@ -1,16 +1,20 @@
 <script setup lang="ts">
 import { ArrowUturnLeftIcon } from "@heroicons/vue/24/solid";
 
-import { Call } from '../../../../stores/chat';
+import { Call } from '../../../../stores/calls';
 
 import SearchInput from "../../../reusables/SearchInput.vue";
 import ContactItem from "../../Sidebar/Contacts/ContactItem.vue";
 import Typography from "../../../reusables/Typography.vue";
+import { useContactsStore } from "../../../../stores/contacts";
 
 
 const props = defineProps<{
     call: Call,
+    closeModal: () => void
 }>();
+
+const contacts = useContactsStore();
 
 </script>
 
@@ -41,7 +45,7 @@ const props = defineProps<{
         <!--contacts-->
         <div ref="contactContainer" class="max-h-[140px]  mb-5 overflow-y-scroll scrollbar scrollbar-hidden">
             <ContactItem v-for="(member, index) in props.call.members" variant="card" :unselectable="true"
-                :contact="member" :key="index" />
+                :contact="contacts.getContact(member)!" :key="index" />
         </div>
     </div>
 </template>

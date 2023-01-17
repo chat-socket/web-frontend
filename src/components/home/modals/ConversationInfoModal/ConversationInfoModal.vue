@@ -2,7 +2,8 @@
 import type { Ref } from "vue";
 import { ref, computed } from "vue";
 
-import { Contact, Conversation } from "../../../../stores/chat";
+import { Conversation } from "../../../../stores/conversations";
+import { Contact } from "../../../../stores/contacts";
 
 import SlideTransition from "../../../reusables/transitions/SlideTransition.vue";
 import Modal from "../Modal.vue";

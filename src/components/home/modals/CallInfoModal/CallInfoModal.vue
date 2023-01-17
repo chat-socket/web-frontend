@@ -2,7 +2,7 @@
 import { computed, ref } from "vue";
 import { ArrowUturnLeftIcon } from "@heroicons/vue/24/solid";
 
-import { Call } from "../../../../stores/chat";
+import { Call } from "../../../../stores/calls";
 
 import SlideTransition from "../../../reusables/transitions/SlideTransition.vue";
 import Modal from "../Modal.vue";
@@ -43,7 +43,8 @@ const changeActiveTab = (event: { tabName: string, animationName: string }) => {
             <div class="w-[300px] py-6 overflow-x-hidden rounded bg-white dark:bg-gray-800">
                 <!--modal content-->
                 <SlideTransition :animation="animation">
-                    <component @active-page-change="changeActiveTab" :is="ActivePage" :call="props.call" />
+                    <component @active-page-change="changeActiveTab" :is="ActivePage" 
+                    :call="props.call" :closeModal="props.closeModal" />
                 </SlideTransition>
 
                 <!--Call agian button-->

@@ -5,11 +5,11 @@ import { ref } from "vue";
 
 
 import useAuthStore from "../../../stores/auth";
-import useChatStore from "../../../stores/chat";
+import { useChatStore } from "../../../stores/chat";
 
 import NavLink from "./NavLink.vue";
 import ProfileDropdown from "./ProfileDropdown.vue";
-import {useSettingsStore} from "../../../stores/settings";
+import { useSettingsStore } from "../../../stores/settings";
 
 const auth = useAuthStore();
 const chat = useChatStore();

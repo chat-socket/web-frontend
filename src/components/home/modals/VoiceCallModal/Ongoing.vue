@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ChatBubbleBottomCenterTextIcon, PhoneIcon, SpeakerXMarkIcon, UserPlusIcon } from "@heroicons/vue/24/solid";
 
-import { Call, Contact } from "../../../../stores/chat";
+import { Contact } from "../../../../stores/contacts";
+import { Call } from "../../../../stores/calls";
 import { getCallName } from "../../../../utils";
 
 import Typography from "../../../reusables/Typography.vue";

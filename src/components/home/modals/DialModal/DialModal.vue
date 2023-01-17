@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Ref } from 'vue';
 import { ref } from 'vue';
-import useChatStore, { Contact } from '../../../../stores/chat';
+import { Contact, useContactsStore } from '../../../../stores/contacts';
 
 import Checkbox from "../../../reusables/Checkbox.vue";
 import SearchInput from "../../../reusables/SearchInput.vue";
@@ -15,7 +15,7 @@ const props = defineProps<{
     open: boolean,
 }>();
 
-const chat = useChatStore();
+const contacts = useContactsStore();
 
 // a list of contacts selected to make a call
 const selectedContacts: Ref<Contact[]> = ref([]);
@@ -69,7 +69,7 @@ const handleSelectedContactsChange = (contact: Contact) => {
 
                 <!--contacts-->
                 <div ref="contactContainer" class="max-h-[216px] mb-5 overflow-y-scroll scrollbar scrollbar-hidden">
-                    <ContactItem v-for="(contact, index) in (chat.contacts as Contact[])" :contact="contact"
+                    <ContactItem v-for="(contact, index) in (contacts.contacts as Contact[])" :contact="contact"
                         @click="handleSelectedContactsChange(contact)" :active="isContactSelected(contact)"
                         :key="index">
 

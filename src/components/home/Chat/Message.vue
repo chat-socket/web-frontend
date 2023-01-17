@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Message } from "../../../stores/chat";
+import { useContactsStore } from "../../../stores/contacts";
+import { Message } from "../../../stores/conversations";
 import { getFullName } from "../../../utils";
 
 import Typography from "../../reusables/Typography.vue";
@@ -7,6 +8,8 @@ import Typography from "../../reusables/Typography.vue";
 const props = defineProps<{
     message: Message
 }>();
+
+const contacts = useContactsStore();
 </script>
 
 <template>
@@ -14,7 +17,7 @@ const props = defineProps<{
          active:bg-emerald-200 dark:hover:bg-gray-600 dark:focus:bg-gray-600 duration-200">
         <!--profile image-->
         <div class="mr-4">
-            <div :style="{ backgroundImage: `url(${props.message.sender.avatar})`}"
+            <div :style="{ backgroundImage: `url(${contacts.getContact(props.message.sender)?.avatar})`}"
                 class="w-7 h-7 rounded-full bg-cover bg-center">
             </div>
         </div>
@@ -23,7 +26,7 @@ const props = defineProps<{
         <div class="grow">
             <div class="flex flex-col items-start">
                 <Typography variant="heading-2" class="mb-4">
-                    {{ getFullName(props.message.sender) }}
+                    {{ getFullName(contacts.getContact(props.message.sender)!) }}
                 </Typography>
 
                 <Typography variant="body-2">

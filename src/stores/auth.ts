@@ -6,7 +6,7 @@ import { ref } from "vue";
 import { USER } from "./fakeData";
 
 export interface User {
-    id: number,
+    id: string,
     firstName: string,
     lastName: string,
     email: string,
@@ -18,25 +18,36 @@ export interface User {
 const useAuthStore = defineStore("auth", {
     state: () => {
         const userStore = new WebStorageStateStore({ store: window.localStorage });
-        const user: Ref<User | undefined> = ref(undefined);
+        const user: Ref<User | undefined> = ref(USER);
 
         const configuration = {
-            'authority': import.meta.env.VITE_OAUTH_ISSUER || '',
-            'client_id': import.meta.env.VITE_OAUTH_CLIENT_ID || '',
-            'redirect_uri': import.meta.env.VITE_OAUTH_REDIRECT_URI || '',
+            'authority': import.meta.env.VITE_OAUTH_ISSUER,
+            'client_id': import.meta.env.VITE_OAUTH_CLIENT_ID,
+            'redirect_uri': import.meta.env.VITE_OAUTH_REDIRECT_URI,
             'response_type': 'code',
             'automaticSilentRenew': true,
-            'silent_redirect_uri': import.meta.env.VITE_OAUTH_SILENT_RENEW_URI || '',
+            'silent_redirect_uri': import.meta.env.VITE_OAUTH_SILENT_RENEW_URI,
             'monitorSession': true,
-            'scope': import.meta.env.VITE_OAUTH_SCOPE || '',
+            'scope': import.meta.env.VITE_OAUTH_SCOPE,
             'post_logout_redirect_uri': '/',
             'loadUserInfo': true
         }
         localStorage.setItem('oauthConf', JSON.stringify(configuration));
         const userManager = new UserManager({'userStore': userStore, ...configuration});
 
+        userManager.events.addUserLoaded(newUser => {
+            console.log("USER LOADED EVENT");
+            userManager.storeUser(newUser);
+            userManager.getUser().then(usr => {
+                console.log("AFTER Get User");
+                console.log(usr);
+            });
+          });
+
         userManager.getUser().then((oidcUser) => {
             if (oidcUser && !oidcUser.expired) {
+                // user.value = {email: oidcUser.profile.email!}
+                console.log("USER LOGGED IN");
                 console.log(oidcUser);
             }
         });

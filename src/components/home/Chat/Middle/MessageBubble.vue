@@ -4,8 +4,9 @@ import { ArrowUturnLeftIcon, BookmarkIcon, BookmarkSquareIcon, TrashIcon } from 
 import linkifyStr from 'linkify-string';
 import type { Ref } from "vue";
 import { ref } from "vue";
+import { useContactsStore } from "../../../../stores/contacts";
 
-import { Message, PreviewData, Recording as RecordingType } from "../../../../stores/chat";
+import { Message, PreviewData, Recording as RecordingType } from "../../../../stores/conversations";
 
 import { getFullName } from "../../../../utils";
 import Dropdown from "../../../reusables/Dropdown.vue";
@@ -64,6 +65,8 @@ const hideAvatar = () => {
         }
     }
 };
+
+const contacts = useContactsStore();
 </script>
 
 <template>
@@ -71,9 +74,9 @@ const hideAvatar = () => {
         <div class="xs:mb-6 md:mb-5 flex" :class="{'justify-end': props.self}">
             <!--avatar-->
             <div class="mr-4" :class="{'ml-[36px]': props.followUp && !divider}">
-                <div v-if="!hideAvatar()" tabindex="0" :aria-label="getFullName((props.message as Message).sender)"
+                <div v-if="!hideAvatar()" tabindex="0" :aria-label="getFullName(contacts.getContact(props.message.sender)!)"
                     class="outline-none">
-                    <div :style=" { backgroundImage: `url(${(props.message as Message).sender.avatar})`}"
+                    <div :style=" { backgroundImage: `url(${contacts.getContact(props.message.sender)!.avatar})`}"
                         class="w-[36px] h-[36px] bg-cover bg-center rounded-full">
                     </div>
                 </div>

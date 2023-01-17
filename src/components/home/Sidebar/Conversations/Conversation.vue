@@ -3,7 +3,7 @@ import { ArchiveBoxArrowDownIcon, InformationCircleIcon, MicrophoneIcon, TrashIc
 import type { Ref } from "vue";
 import { computed, ref } from "vue";
 
-import { Attachment, Conversation, Recording } from "../../../../stores/chat";
+import { Attachment, Conversation, Recording } from "../../../../stores/conversations";
 import { getAvatar, getName, hasAttachments, shorten } from "../../../../utils";
 
 import Dropdown from "../../../reusables/Dropdown.vue";

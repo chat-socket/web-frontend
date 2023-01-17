@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Contact } from "../../../../stores/chat";
+import { Contact } from "../../../../stores/contacts";
 
 import Typography from "../../../reusables/Typography.vue";
 

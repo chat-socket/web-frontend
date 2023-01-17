@@ -2,7 +2,8 @@
 import { PhoneIcon, PhoneArrowDownLeftIcon, PhoneArrowUpRightIcon, PhoneXMarkIcon } from "@heroicons/vue/24/solid";
 import { computed } from "vue";
 
-import { Call } from "../../../../stores/chat";
+import { Call } from "../../../../stores/calls";
+import { useContactsStore } from "../../../../stores/contacts";
 import { getCallName, getOtherMembers } from "../../../../utils";
 
 import Typography from "../../../reusables/Typography.vue";
@@ -25,6 +26,8 @@ const handleOpenInfoModal = () => {
         props.openInfoModal(props.call);
     }
 };
+
+const contacts = useContactsStore();
 </script>
 
 <template>
@@ -41,11 +44,11 @@ const handleOpenInfoModal = () => {
             <div :class="members.length === 1 ? ['mr-4'] : ['mr-[32px]']">
                 <div class="relative">
                     <button v-if="props.active" class="relative block" @click="props.openVoiceCallModall">
-                        <CallAvatar v-for="(member, index) in members" :member="member" :index="index"
+                        <CallAvatar v-for="(member, index) in members" :member="contacts.getContact(member)!" :index="index"
                             :members-length="members.length" />
                     </button>
 
-                    <CallAvatar v-else v-for="(member, index) in members" :member="member" :index="index"
+                    <CallAvatar v-else v-for="(member, index) in members" :member="contacts.getContact(member)!" :index="index"
                         :members-length="members.length" />
                 </div>
             </div>

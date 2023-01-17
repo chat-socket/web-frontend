@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Conversation } from "../../../stores/chat";
+import { Conversation } from "../../../stores/conversations";
 
 import SearchInput from "../../reusables/SearchInput.vue";
 import Typography from "../../reusables/Typography.vue";

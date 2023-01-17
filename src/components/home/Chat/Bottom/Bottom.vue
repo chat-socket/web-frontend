@@ -4,7 +4,7 @@ import type { Ref } from "vue";
 import { ref } from "vue";
 import EmojiPicker from 'vue3-emoji-picker';
 
-import useChatStore, { Conversation, Message } from "../../../../stores/chat";
+import { useConversationsStore, Conversation, Message } from "../../../../stores/conversations";
 
 import IconButton from "../../../reusables/IconButton.vue";
 import PrimaryButton from "../../../reusables/PrimaryButton.vue";
@@ -22,7 +22,7 @@ const props = defineProps<{
     removeMessageToReplyTo: () => void
 }>();
 
-const chat = useChatStore();
+const conversations = useConversationsStore();
 const settings = useSettingsStore();
 
 // the content of the message
@@ -66,7 +66,7 @@ const handleClickOutside = (event: Event) => {
                 :remove-message-to-reply-to="removeMessageToReplyTo" />
         </div>
 
-        <div class="h-[80px] px-5 flex items-center" v-if="chat.status !== 'loading'"
+        <div class="h-[80px] px-5 flex items-center" v-if="conversations.isLoaded"
             :class="recording ? ['justify-between'] : []">
             <!--select attachments button-->
             <IconButton @click="openAttachmentsModal = true" v-if="!recording" class="group w-7 h-7 mr-5 ">

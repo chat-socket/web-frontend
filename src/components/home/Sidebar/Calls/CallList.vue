@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { Call as CallType } from "../../../../stores/chat";
+import { Call as CallType } from "../../../../stores/calls";
 
 import Call from "./Call.vue";
 
 const props = defineProps<{
     calls: CallType[]
-    chatStatus: string,
-    delayLoading: string
     openInfoModal: (call: CallType) => void,
 }>();
 </script>

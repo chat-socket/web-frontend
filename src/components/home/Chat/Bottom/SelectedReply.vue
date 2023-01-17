@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { XCircleIcon } from "@heroicons/vue/24/outline";
 
-import { Message } from "../../../../stores/chat";
+import { Message } from "../../../../stores/conversations";
 
 import IconButton from "../../../reusables/IconButton.vue";
 import SlideTransition from "../../../reusables/transitions/SlideTransition.vue";

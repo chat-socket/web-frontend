@@ -2,7 +2,7 @@
 import { CalendarIcon, PhoneArrowUpRightIcon, PhoneArrowDownLeftIcon, PhoneXMarkIcon, UserGroupIcon } from "@heroicons/vue/24/outline";
 import { computed } from "vue";
 
-import { Call } from "../../../../stores/chat";
+import { Call } from "../../../../stores/calls";
 
 import InfoItem from "../../../reusables/InfoItem.vue";
 import Typography from "../../../reusables/Typography.vue";

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Attachment, Message } from "../../../stores/chat";
+import { Attachment, Message } from "../../../stores/conversations";
+import { useContactsStore } from "../../../stores/contacts";
 import { getFullName, hasAttachments, shorten } from "../../../utils";
 import useAuthStore, { User } from "../../../stores/auth";
 
@@ -11,17 +12,18 @@ const props = defineProps<{
 }>()
 
 const auth = useAuthStore();
+const contacts = useContactsStore();
 </script>
 
 <template>
     <div class="border-l pl-3 cursor-pointer outline-none border-opacity-50 duration-200" :class="props.self ?
      ['border-white'] 
     : ['border-black', 'dark:border-white', 'dark:border-opacity-50']" tabindex="0"
-        :aria-label="'reply to: ' + getFullName(props.message.sender) ">
+        :aria-label="'reply to: ' + getFullName(contacts.getContact(props.message.sender)!) ">
         <!--name-->
         <p class="mb-3 font-semibold text-xs leading-4 tracking-[0.16px]"
             :class="props.self ? ['text-white'] : ['text-black', 'opacity-50', 'dark:text-white', 'dark:opacity-70'] ">
-            {{message.sender.id !== (auth.user as User).id ? getFullName(props.message.sender): 'You'}}
+            {{message.sender !== (auth.user as User).id ? getFullName(contacts.getContact(props.message.sender)!): 'You'}}
         </p>
 
         <!--content-->

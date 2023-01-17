@@ -2,7 +2,8 @@
 import { ArrowUturnLeftIcon } from "@heroicons/vue/24/outline";
 import { computed } from 'vue';
 
-import { Contact, Conversation, Message } from '../../../../stores/chat';
+import { Conversation, Message } from '../../../../stores/conversations';
+import { Contact } from "../../../../stores/contacts";
 import { hasAttachments } from "../../../../utils";
 
 import NoMedia from "../../../reusables/emptyStates/NoMedia.vue";
@@ -23,7 +24,7 @@ const attachmentMessages = computed(() => {
     for (let message of props.conversation.messages) {
         if (hasAttachments(message)) {
             if (props.contact) {
-                if (message.sender.id === props.contact.id) {
+                if (message.sender === props.contact.id) {
                     media.push(message);
                 }
             } else {

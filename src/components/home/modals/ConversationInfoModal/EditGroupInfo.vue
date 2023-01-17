@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ArrowUturnLeftIcon } from "@heroicons/vue/24/solid";
 
-import { Conversation } from "../../../../stores/chat";
+import { Conversation } from "../../../../stores/conversations";
 
 import DropFileUpload from '../../../reusables/DropFileUpload.vue';
 import PrimaryButton from '../../../reusables/PrimaryButton.vue';

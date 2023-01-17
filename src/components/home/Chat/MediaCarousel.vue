@@ -4,7 +4,7 @@ import { useFocusTrap } from '@vueuse/integrations/useFocusTrap';
 import type { Ref } from "vue";
 import { computed, inject, onMounted, onUnmounted, ref, watch } from "vue";
 
-import { Attachment, Conversation } from "../../../stores/chat";
+import { Attachment, Conversation } from "../../../stores/conversations";
 import { hasAttachments } from "../../../utils";
 
 import VideoPlayer from "./VideoPlayer.vue";

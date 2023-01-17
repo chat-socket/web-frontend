@@ -2,7 +2,7 @@
 import { PlusCircleIcon } from "@heroicons/vue/24/outline";
 import { Ref, ref } from "vue";
 
-import useChatStore, { Call as CallType } from "../../../../stores/chat";
+import { useCallsStore, Call as CallType } from "../../../../stores/calls";
 
 import NoCalls from "../../../reusables/emptyStates/NoCalls.vue";
 import IconButton from "../../../reusables/IconButton.vue";
@@ -14,7 +14,7 @@ import CallList from "./CallList.vue";
 import CallInfoModal from "../../modals/CallInfoModal/CallInfoModal.vue";
 import DialModal from "../../modals/DialModal/DialModal.vue";
 
-const chat = useChatStore();
+const calls = useCallsStore();
 
 const selectedCall: Ref<CallType | null> = ref(null)
 
@@ -45,19 +45,18 @@ const handleOpenInfoModal = (call: CallType) => {
         <!--content-->
         <div ref="contactContainer" class="w-full h-full scroll-smooth scrollbar-hidden"
             style="overflow-x:visible; overflow-y: scroll;">
-            <Loading1 v-if="chat.status === 'loading'  || chat.delayLoading" v-for="item in 6" />
+            <Loading1 v-if="!calls.isLoaded" v-for="item in 6" />
 
             <div v-else>
                 <ExpandTransition>
-                    <div class="max-h-[200px]" v-if="chat.callMinimized && chat.activeCall">
-                        <Call v-if="chat.activeCall" :call="chat.activeCall"
-                            :open-voice-call-modal="() => chat.openVoiceCall = true"
-                            :end-call="() => {chat.activeCall = null; chat.callMinimized = false}" active />
+                    <div class="max-h-[200px]" v-if="calls.callMinimized && calls.activeCall">
+                        <Call v-if="calls.activeCall" :call="calls.activeCall"
+                            :open-voice-call-modal="() => calls.openVoiceCall = true"
+                            :end-call="() => calls.endCurrentCall()" active />
                     </div>
                 </ExpandTransition>
 
-                <CallList v-if="(chat.calls as CallType[])?.length > 0" :calls="(chat.calls as CallType[])"
-                    delay-loading="chat.delayLoading" :chat-status="chat.status"
+                <CallList v-if="(calls.calls as CallType[])?.length > 0" :calls="(calls.calls as CallType[])"
                     :open-info-modal="handleOpenInfoModal" />
 
                 <NoCalls v-else />

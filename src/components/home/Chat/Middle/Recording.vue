@@ -2,7 +2,7 @@
 import { PauseIcon, PlayIcon } from "@heroicons/vue/24/solid";
 import { ref } from "vue";
 
-import { Recording } from "../../../../stores/chat";
+import { Recording } from "../../../../stores/conversations";
 
 import RangeSlider from "../../../reusables/RangeSlider.vue";
 import Typography from "../../../reusables/Typography.vue";

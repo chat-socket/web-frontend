@@ -1,0 +1,15 @@
+{
+    "id":6,
+    "type":"voice",
+    "status":"dialing",
+    "direction":"outgoing",
+    "date":"Dec 12, 2020",
+    "length":"01:12",
+    "members":[
+       "glmanhtu@gmail.com",
+       "evelyn@gmail.com"
+    ],
+    "admins":[
+       "glmanhtu@gmail.com"
+    ]
+ }

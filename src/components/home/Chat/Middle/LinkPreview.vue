@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { LinkIcon } from "@heroicons/vue/24/outline";
 
-import { PreviewData } from "../../../../stores/chat";
+import { PreviewData } from "../../../../stores/conversations";
 
 const props = defineProps<{
     self?: boolean,

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-import useChatStore from "../../../stores/chat";
+import { useChatStore } from "../../../stores/chat";
 
 import FadeTransition from "../../reusables/transitions/FadeTransition.vue";
 import Contacts from "./Contacts/Contacts.vue";

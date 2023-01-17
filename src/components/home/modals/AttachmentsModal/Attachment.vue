@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ArrowPathRoundedSquareIcon, DocumentIcon, PhotoIcon, TrashIcon, VideoCameraIcon } from "@heroicons/vue/24/outline";
-import { Attachment } from "../../../../stores/chat";
+import { Attachment } from "../../../../stores/conversations";
 
 import Typography from "../../../reusables/Typography.vue";
 import IconButton from "../../../reusables/IconButton.vue";

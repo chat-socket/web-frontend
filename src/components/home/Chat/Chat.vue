@@ -1,30 +1,30 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-import useChatStore from "../../../stores/chat";
+import { useConversationsStore } from "../../../stores/conversations";
 
 import loading3 from "../../reusables/loading/loading3.vue";
 import NoChatSelected from "../../reusables/emptyStates/NoChatSelected.vue";
 import SelectedChat from "./SelectedChat.vue";
 
 
-const chat = useChatStore();
+const conversations = useConversationsStore();
 
 // search the selected conversation using activeConversationId.
 const activeConversation = computed(() => {
-    let activeConversation = chat.conversations?.find(conversation => conversation.id === chat.activeConversationId);
+    let activeConversation = conversations.conversations?.find(conversation => conversation.id === conversations.activeConversationId);
 
     if (activeConversation)
         return activeConversation;
     else
-        return chat.archivedConversations?.find(conversation => conversation.id === chat.activeConversationId);
+        return conversations.archivedConversations?.find(conversation => conversation.id === conversations.activeConversationId);
 });
 
 // the active chat component or loading component.
 const activeChatComponent = computed(() => {
-    if (chat.status === 'loading' || chat.delayLoading)
+    if (!conversations.isLoaded)
         return loading3;
-    else if (chat.activeConversationId)
+    else if (conversations.activeConversationId)
         return SelectedChat;
     else
         return NoChatSelected;
@@ -36,7 +36,7 @@ const activeChatComponent = computed(() => {
 <template>
     <div id="mainContent"
         class="xs:absolute xs:z-10 md:static grow h-full xs:w-full md:w-fit scrollbar-hidden bg-white dark:bg-gray-800 transition-all duration-500"
-        :class="chat.conversationOpen === 'open' ? ['xs:left-[0px]','xs:static'] : ['xs:left-[1000px]']" role="region">
+        :class="conversations.conversationOpen === 'open' ? ['xs:left-[0px]','xs:static'] : ['xs:left-[1000px]']" role="region">
         <Transition name="fade" mode="out-in">
             <component :is="activeChatComponent" :active-conversation="activeConversation"
                 :key="activeConversation?.id" />

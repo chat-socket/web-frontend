@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { ATTACHMENTS } from "../../../../stores/fakeData";
-import useChatStore from "../../../../stores/chat";
+import { useChatStore } from "../../../../stores/chat";
 
 import PrimaryButton from "../../../reusables/PrimaryButton.vue";
 import TextInput from "../../../reusables/TextInput.vue";
 import Modal from "../Modal.vue";
 import Attachment from "./Attachment.vue";
-import {useSettingsStore} from "../../../../stores/settings";
+import { useSettingsStore } from "../../../../stores/settings";
 
 const props = defineProps<{
     open: boolean,

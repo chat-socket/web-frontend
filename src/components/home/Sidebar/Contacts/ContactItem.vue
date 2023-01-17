@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import useAuthStore, { User } from "../../../../stores/auth";
-import { Contact } from "../../../../stores/chat";
+import { Contact } from "../../../../stores/contacts";
 import { getFullName } from "../../../../utils";
 
 import Typography from "../../../reusables/Typography.vue";

@@ -3,7 +3,8 @@ import { ArrowLeftOnRectangleIcon, PencilIcon, AtSymbolIcon, BellIcon, NoSymbolI
 import { ArrowUturnLeftIcon } from "@heroicons/vue/24/solid";
 import { computed, ref } from "vue";
 
-import { Contact, Conversation } from "../../../../stores/chat";
+import { Conversation } from "../../../../stores/conversations";
+import { Contact } from "../../../../stores/contacts";
 import { getAvatar, getFullName, getName, getOddContact } from "../../../../utils";
 
 import InfoItem from "../../../reusables/InfoItem.vue";
@@ -119,7 +120,7 @@ const imageUrl = computed(() => {
             <!--(contact) email-->
             <div v-if="(conversation as Conversation).type === 'couple' || props.contact"
                 class="flex px-5 pb-5 items-center">
-                <InfoItem :icon="AtSymbolIcon" :title="getOddContact(props.conversation)?.email" />
+                <InfoItem :icon="AtSymbolIcon" :title="getOddContact(props.conversation!)" />
             </div>
 
             <!--(group) members-->

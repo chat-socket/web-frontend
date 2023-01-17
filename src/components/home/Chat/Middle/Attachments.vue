@@ -4,7 +4,7 @@ import { PlayIcon } from "@heroicons/vue/24/solid";
 import type { Ref } from "vue";
 import { computed, ref } from "vue";
 
-import { Message, Attachment } from "../../../../stores/chat";
+import { Message, Attachment } from "../../../../stores/conversations";
 
 import Typography from "../../../reusables/Typography.vue";
 import MediaCarousel from "../MediaCarousel.vue";

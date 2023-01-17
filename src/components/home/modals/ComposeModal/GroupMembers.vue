@@ -1,13 +1,13 @@
 <script setup lang="ts">
 
-import useChatStore from '../../../../stores/chat';
+import { useContactsStore } from '../../../../stores/contacts';
 
 import Loading1 from '../../../reusables/loading/Loading1.vue';
 import PrimaryButton from '../../../reusables/PrimaryButton.vue';
 import SearchInput from '../../../reusables/SearchInput.vue';
 import ContactItem from '../../Sidebar/Contacts/ContactItem.vue';
 
-const chat = useChatStore();
+const contacts = useContactsStore();
 </script>
 
 <template>
@@ -19,10 +19,10 @@ const chat = useChatStore();
 
         <!--contacts-->
         <div class="overflow-y-scroll scrollbar scrollbar-hidden max-h-[200px] mb-5">
-            <ContactItem v-if="chat.status === 'success' && !chat.delayLoading"
-                v-for="(contact, index) in chat.contacts" :key="index" :contact="contact" />
+            <ContactItem v-if="contacts.isLoaded"
+                v-for="(contact, index) in contacts.contacts" :key="index" :contact="contact" />
 
-            <Loading1 v-if="chat.status === 'loading'  || chat.delayLoading" v-for="item in 3" />
+            <Loading1 v-if="!contacts.isLoaded" v-for="item in 3" />
         </div>
 
         <div class="flex px-5 mt-5 pb-6">

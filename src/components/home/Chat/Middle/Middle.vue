@@ -3,8 +3,7 @@ import type { Ref } from "vue";
 import { onMounted, provide, ref } from "vue";
 
 import useAuthStore, { User } from "../../../../stores/auth";
-import useChatStore, { Conversation, Message as MessageType } from "../../../../stores/chat";
-import { getConversationIndex } from "../../../../utils";
+import { useConversationsStore, Conversation, Message as MessageType } from "../../../../stores/conversations";
 
 import MessageBubble from "./MessageBubble.vue";
 import TimelineDivider from "./TimelineDivider.vue";
@@ -15,8 +14,7 @@ const props = defineProps<{
 }>();
 
 const auth = useAuthStore();
-
-const chat = useChatStore()
+const conversations = useConversationsStore();
 
 const container: Ref<HTMLElement | null> = ref(null)
 
@@ -25,15 +23,15 @@ const isFollowUp = (index: number, previousIndex: number): boolean => {
     if (previousIndex < 0) {
         return false;
     } else {
-        let previousSender = props.activeConversation?.messages[previousIndex].sender.id;
-        let currentSender = props.activeConversation?.messages[index].sender.id;
+        let previousSender = props.activeConversation?.messages[previousIndex].sender;
+        let currentSender = props.activeConversation?.messages[index].sender;
         return previousSender === currentSender;
     }
 };
 
 // checks whether the message is sent by the authenticated user.
 const isSelf = (message: MessageType): boolean => {
-    return message.sender.id === (auth.user as User).id
+    return message.sender === (auth.user as User).id
 };
 
 // checks wether the new message has been sent in a new day or not.
@@ -60,11 +58,11 @@ const getReplyToMessage = (message: MessageType) => {
 
 // (event) pin message to conversation
 const handlePinMessage = (messageId: number) => {
-    let activeConversationIndex = getConversationIndex((props.activeConversation as Conversation).id);
+    let activeConversationIndex = conversations.getConversationIndex((props.activeConversation as Conversation).id);
 
     if (activeConversationIndex !== undefined && activeConversationIndex !== null) {
-        (chat.conversations as Conversation[])[activeConversationIndex].pinnedMessage = messageId;
-        (chat.conversations as Conversation[])[activeConversationIndex].pinnedMessageHidden = false;
+        (conversations.conversations as Conversation[])[activeConversationIndex].pinnedMessage = messageId;
+        (conversations.conversations as Conversation[])[activeConversationIndex].pinnedMessageHidden = false;
     }
 };
 
@@ -74,7 +72,7 @@ provide('activeConversaion', props.activeConversation);
 
 <template>
     <div ref="container" class="grow px-5 py-5 flex flex-col overflow-y-scroll scrollbar-hidden">
-        <div v-if="chat.status !== 'loading'"
+        <div v-if="conversations.isLoaded"
             v-for="(message, index) in (props.activeConversation as Conversation).messages" :key="index">
             <TimelineDivider v-if="renderDivider(index, index-1)" />
 

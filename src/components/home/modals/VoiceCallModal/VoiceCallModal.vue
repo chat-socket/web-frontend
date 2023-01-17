@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 
-import useChatStore, { Call } from "../../../../stores/chat";
+import { Call, useCallsStore } from "../../../../stores/calls";
 import { getOtherMembers } from "../../../../utils";
 
 import FadeTransition from "../../../reusables/transitions/FadeTransition.vue";
@@ -14,10 +14,10 @@ const props = defineProps<{
     closeModal: (endCall: boolean) => void,
 }>();
 
-const chat = useChatStore();
+const calls = useCallsStore();
 
 const members = computed(() => {
-    return getOtherMembers((chat.activeCall as Call))
+    return getOtherMembers((calls.activeCall as Call))
 });
 
 // determine the modal width based on the active component
@@ -25,11 +25,11 @@ const modalSize = ref('290px');
 
 // the active modal component
 const ActiveComponent = computed(() => {
-    if (chat.activeCall) {
-        if (chat?.activeCall.status === 'dialing') {
+    if (calls.activeCall) {
+        if (calls?.activeCall.status === 'dialing') {
             modalSize.value = '290px'
             return Dialing;
-        } else if (chat?.activeCall.status === 'ongoing') {
+        } else if (calls?.activeCall.status === 'ongoing') {
             modalSize.value = '400px'
             return Ongoing;
         }
@@ -39,7 +39,7 @@ const ActiveComponent = computed(() => {
 });
 
 const handleCallStatusChange = (status: string) => {
-    (chat.activeCall as Call).status = status;
+    (calls.activeCall as Call).status = status;
 };
 </script>
 
@@ -48,7 +48,7 @@ const handleCallStatusChange = (status: string) => {
         <template v-slot:content>
             <div class="rounded bg-white dark:bg-gray-800 transition-all duration-300" :style="{'width': modalSize}">
                 <FadeTransition>
-                    <component :is="ActiveComponent" :members="members" :active-call="chat.activeCall"
+                    <component :is="ActiveComponent" :members="members" :active-call="calls.activeCall"
                         :close-modal="() => props.closeModal(true)"
                         :handle-call-status-change="handleCallStatusChange" />
                 </FadeTransition>

@@ -2,8 +2,7 @@
 import { EyeSlashIcon } from "@heroicons/vue/24/outline";
 import { computed } from "vue";
 
-import useChatStore, { Conversation } from "../../../../stores/chat";
-import { getConversationIndex } from "../../../../utils";
+import { Conversation, useConversationsStore } from "../../../../stores/conversations";
 
 import IconButton from "../../../reusables/IconButton.vue";
 import SlideTransition from "../../../reusables/transitions/SlideTransition.vue";
@@ -13,7 +12,7 @@ const props = defineProps<{
     activeConversation?: Conversation,
 }>();
 
-const chat = useChatStore();
+const conversations = useConversationsStore();
 
 
 // extract the pinned message from the id
@@ -25,19 +24,19 @@ const pinnedMessage = computed(() => {
 
 // (event) hide the pinned message
 const hidePinnedMessage = () => {
-    const activeConversationIndex = getConversationIndex((props.activeConversation as Conversation).id);
+    const activeConversationIndex = conversations.getConversationIndex((props.activeConversation as Conversation).id);
 
     if (activeConversationIndex !== undefined && activeConversationIndex !== null) {
-        (chat.conversations as Conversation[])[activeConversationIndex].pinnedMessageHidden = true;
+        (conversations.conversations as Conversation[])[activeConversationIndex].pinnedMessageHidden = true;
     }
 };
 
 // (event) remove the pinned message
 const removePinnedMessage = () => {
-    const activeConversationIndex = getConversationIndex((props.activeConversation as Conversation).id);
+    const activeConversationIndex = conversations.getConversationIndex((props.activeConversation as Conversation).id);
 
     if (activeConversationIndex !== undefined && activeConversationIndex !== null) {
-        (chat.conversations as Conversation[])[activeConversationIndex].pinnedMessage = undefined;
+        (conversations.conversations as Conversation[])[activeConversationIndex].pinnedMessage = undefined;
     }
 };
 </script>

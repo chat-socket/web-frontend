@@ -5,7 +5,8 @@ import type { Ref } from "vue";
 import { ref } from 'vue';
 
 import useAuthStore, { User } from "../../../../stores/auth";
-import { Conversation } from '../../../../stores/chat';
+import { useContactsStore } from "../../../../stores/contacts";
+import { Conversation } from '../../../../stores/conversations';
 
 import Dropdown from "../../../reusables/Dropdown.vue";
 import DropdownLink from "../../../reusables/DropdownLink.vue";
@@ -63,6 +64,8 @@ const handleClickOutside = (event: Event) => {
         closeDropdowns();
     }
 };
+
+const contacts = useContactsStore();
 </script>
 
 <template>
@@ -94,16 +97,16 @@ const handleClickOutside = (event: Event) => {
         <div ref="contactContainer" class="max-h-[232px] overflow-y-scroll scrollbar scrollbar-hidden">
             <ContactItem variant="card"
                 @contact-selected="contact => $emit('active-page-change', {tabName: 'conversation-info', animationName: 'slide-left', contact: contact})"
-                v-for="(contact, index) in props.conversation.contacts" :contact="contact" :key="index">
+                v-for="(contact, index) in props.conversation.contacts" :contact="contacts.getContact(contact)!" :key="index">
 
-                <template v-slot:tag v-if="(props.conversation.admins as number[]).includes(contact.id)">
+                <template v-slot:tag v-if="(props.conversation.admins as string[]).includes(contact)">
                     <div class="ml-3">
                         <Typography variant="body-4" noColor class="text-emerald-400">admin</Typography>
                     </div>
                 </template>
 
                 <template v-slot:menu
-                    v-if="(props.conversation.admins as number[]).includes((auth.user as User).id) && contact.id !== (auth.user as User).id">
+                    v-if="(props.conversation.admins as string[]).includes((auth.user as User).id) && contact !== (auth.user as User).id">
                     <div>
                         <!--dropdown menu button-->
                         <IconButton @click="event => handleToggleDropdown(event, index)" class="open-menu w-6 h-6">
