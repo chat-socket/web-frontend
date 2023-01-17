@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import useAuthStore from "../../stores/auth";
+
+const auth = useAuthStore();
+
 </script>
 
 <template>
@@ -50,7 +54,7 @@
 
           <li class="flex items-center">
             <button class="bg-emerald-500 text-white active:bg-emerald-600 text-xs font-bold uppercase px-5 py-3 rounded-xs shadow hover:shadow-lg outline-none focus:outline-none lg:mr-1 lg:mb-0 ml-3 mb-3 ease-linear transition-all duration-150"
-                type="button" >
+                type="button" @click="auth.login()">
               Login
             </button>
           </li>

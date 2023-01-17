@@ -2,14 +2,12 @@
 import type { Ref } from "vue";
 import { ref } from "vue";
 
-import useChatStore, { Settings } from "../../../../stores/chat";
 import { updateAccount } from "../../../../stores/fakeData";
 import { BooleanValue, FileOrTextValue, Value } from "./types";
 
 import AccordionElement from "./AccordionElement.vue";
 import {useSettingsStore} from "../../../../stores/settings";
 
-const chat = useChatStore();
 const settings = useSettingsStore();
 
 // array that contains values that determine whether the accordion is collapsed or opened.

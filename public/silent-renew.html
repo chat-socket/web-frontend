@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Waiting...</title>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/oidc-client-ts/2.2.0/browser/oidc-client-ts.min.js" integrity="sha512-A/HVXkFHfPdtjO8jO60fc2SYbJGBtXWQv6+6NRxOW6Bte2E88nkZ5VGHXzj+ZN25uUEFtGSCABllEzp9//z8Hg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    var configuration = JSON.parse(window.localStorage.getItem('oauthConf'));
+    var webStorage = new oidc.WebStorageStateStore({ store: window.localStorage });
+
+    var mgr = new oidc.UserManager({userStore: webStorage, ...configuration});
+    mgr.signinSilentCallback();
+</script>
+</body>
+</html>

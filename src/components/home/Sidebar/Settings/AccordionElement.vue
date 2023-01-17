@@ -2,13 +2,13 @@
 import { ChevronRightIcon } from "@heroicons/vue/24/outline";
 import { ref } from "vue";
 
-import { Settings } from "../../../../stores/chat";
 import { BooleanValue, FileOrTextValue } from "./types";
 
 import PrimaryButton from "../../../reusables/PrimaryButton.vue";
 import CollapseTransition from "../../../reusables/transitions/CollapseTransition.vue";
 import Typography from "../../../reusables/Typography.vue";
 import AccordionInput from "./AccordionInput.vue";
+import {Settings} from "../../../../stores/settings";
 
 const props = defineProps<{
     index: number,

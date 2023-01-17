@@ -1,11 +1,11 @@
 <script setup lang="ts">
 
-import { Setting } from "../../../../stores/chat";
 import { BooleanValue, FileOrTextValue, FileValue, TextValue } from "./types";
 
 import DropFileUpload from "../../../reusables/DropFileUpload.vue";
 import SwitchInput from "../../../reusables/SwitchInput.vue";
 import TextInput from "../../../reusables/TextInput.vue";
+import {Setting} from "../../../../stores/settings";
 
 const props = defineProps<{
     setting: Setting,
