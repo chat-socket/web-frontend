@@ -12,7 +12,6 @@ import IconButton from "../../../reusables/IconButton.vue";
 import Typography from "../../../reusables/Typography.vue";
 import ConversationInfoModal from "../../modals/ConversationInfoModal/ConversationInfoModal.vue";
 import SearchModal from "../../modals/SearchModal.vue";
-import SelectedPinnedMessage from "./SelectedPinnedMessage.vue";
 import VoiceCallModal from "../../modals/VoiceCallModal/VoiceCallModal.vue";
 import { ACTIVECALL } from "../../../../stores/fakeData";
 
@@ -153,12 +152,6 @@ const handleCloseVoiceCallModal = (endCall: boolean) => {
                     </Dropdown>
                 </div>
             </div>
-        </div>
-
-        <!--Pinned Message-->
-        <div class="relative transition-[padding] duration-200"
-            :class="{'pb-[60px]': (props.activeConversation as Conversation).pinnedMessage && !(props.activeConversation as Conversation).pinnedMessageHidden}">
-            <SelectedPinnedMessage :active-conversation="props.activeConversation" />
         </div>
 
         <!--Search modal-->

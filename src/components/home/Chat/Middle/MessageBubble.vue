@@ -25,7 +25,6 @@ const props = defineProps<{
     divider?: boolean,
     replyToMessage?: Message,
     selectMessageToReplyTo: (message?: Message) => void,
-    handlePinMessage: (messageId: number) => void,
 }>();
 
 const showContextMenu = ref(false);
@@ -146,11 +145,6 @@ const contacts = useContactsStore();
             <DropdownLink :handle-click="handleCloseContextMenu">
                 <BookmarkIcon class="h-5 w-5 mr-3 text-black opacity-60 dark:text-white dark:opacity-70" />
                 Copy
-            </DropdownLink>
-
-            <DropdownLink :handle-click="()=> {handleCloseContextMenu(); props.handlePinMessage(props.message.id)} ">
-                <BookmarkSquareIcon class="h-5 w-5 mr-3 text-black opacity-60 dark:text-white dark:opacity-70" />
-                Pin
             </DropdownLink>
 
             <DropdownLink :handle-click="handleCloseContextMenu"

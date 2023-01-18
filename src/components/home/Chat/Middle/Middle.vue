@@ -70,16 +70,6 @@ const getReplyToMessage = (message: MessageType) => {
     }
 };
 
-// (event) pin message to conversation
-const handlePinMessage = (messageId: number) => {
-    let activeConversationIndex = conversations.getConversationIndex((props.activeConversation as Conversation).id);
-
-    if (activeConversationIndex !== undefined && activeConversationIndex !== null) {
-        (conversations.conversations as Conversation[])[activeConversationIndex].pinnedMessage = messageId;
-        (conversations.conversations as Conversation[])[activeConversationIndex].pinnedMessageHidden = false;
-    }
-};
-
 // provide the active conversation to all children
 provide('activeConversaion', props.activeConversation);
 </script>
