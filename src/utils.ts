@@ -76,20 +76,6 @@ export const hasAttachments = (message: Message) => {
     return attachments && attachments.length > 0;
 };
 
-// get index of the conversation inside the conversations array
-export const getConversationIndex = (conversationId: number) => {
-    let conversationIndex;
-    const conversations = useConversationsStore();
-
-    (conversations.conversations as Conversation[]).forEach((conversation, index) => {
-        if (conversation.id === conversationId) {
-            conversationIndex = index;
-        }
-    });
-
-    return conversationIndex;
-};
-
 export const getOtherMembers = (call: Call) => {
     let members = [];
 

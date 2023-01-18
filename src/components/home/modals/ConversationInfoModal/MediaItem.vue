@@ -7,7 +7,7 @@ import Typography from "../../../reusables/Typography.vue";
 
 const props = defineProps<{
     attachment: Attachment,
-    date: string,
+    date: Date,
 }>();
 </script>
 
