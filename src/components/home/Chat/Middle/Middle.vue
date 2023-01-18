@@ -87,7 +87,7 @@ provide('activeConversaion', props.activeConversation);
 <template>
     <div ref="container" class="grow px-5 py-5 flex flex-col overflow-y-scroll scrollbar-hidden">
         <div v-if="conversations.isLoaded"
-            v-for="(message, index) in (props.activeConversation as Conversation).messages" :key="index">
+            v-for="(message, index) in (props.activeConversation as Conversation).messages" :key="message.id">
             <TimelineDivider v-if="messageInfo.useDivider[index]" :date="messageInfo.dateDivider[index]" />
 
             <MessageBubble :message="message" :self="isSelf(message)" :follow-up="messageInfo.isFollowUp[index]"
