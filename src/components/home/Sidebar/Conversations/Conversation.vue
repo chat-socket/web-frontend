@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ArchiveBoxArrowDownIcon, InformationCircleIcon, MicrophoneIcon, TrashIcon } from "@heroicons/vue/24/outline";
 import type { Ref } from "vue";
+import moment from 'moment'
 import { computed, ref } from "vue";
 
 import { Attachment, Conversation, Recording } from "../../../../stores/conversations";
@@ -79,7 +80,7 @@ const lastMessage = computed(() => props.conversation.messages[props.conversatio
 
                         <!--last message date-->
                         <Typography variant="body-1">
-                            {{lastMessage?.date}}
+                            {{moment(lastMessage?.date).fromNow(true)}}
                         </Typography>
                     </div>
                 </div>

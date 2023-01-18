@@ -11,27 +11,27 @@
              {
                 "id":1,
                 "content":"Lorem ipsum dolor sit amet.",
-                "date":"3:00 pm",
+                "date":"2023-01-17T14:00:19.409Z",
                 "sender":"elijah@gmail.com"
              },
              {
                 "id":2,
                 "content":"Lorem ipsum dolor sit amet.",
-                "date":"4:00 pm",
+                "date":"2023-01-17T14:00:50.409Z",
                 "sender":"glmanhtu@gmail.com",
                 "replyTo":1
              },
              {
                 "id":3,
                 "content":"Lorem ipsum dolor sit amet.",
-                "date":"3:00 pm",
+                "date":"2023-01-17T14:01:10.409Z",
                 "sender":"elijah@gmail.com",
                 "replyTo":2
              },
              {
                 "id":4,
                 "content":"Check this out https://github.com/",
-                "date":"4:00 pm",
+                "date":"2023-01-17T14:02:19.409Z",
                 "sender":"elijah@gmail.com",
                 "previewData":{
                    "link":"https://github.com/",
@@ -44,7 +44,7 @@
              {
                 "id":5,
                 "content":"Lorem ipsum dolor sit amet.",
-                "date":"5:00 pm",
+                "date":"2023-01-17T14:03:10.409Z",
                 "sender":"glmanhtu@gmail.com",
                 "attachments":[
                    {
@@ -73,7 +73,7 @@
              },
              {
                 "id":6,
-                "date":"5:30 pm",
+                "date":"2023-01-17T14:05:01.409Z",
                 "attachments":[
                    {
                       "id":4,
@@ -87,7 +87,7 @@
              },
              {
                 "id":7,
-                "date":"6:00 pm",
+                "date":"2023-01-17T14:05:20.409Z",
                 "attachments":[
                    {
                       "id":5,
@@ -117,7 +117,7 @@
                    "url":"",
                    "duration":"23s"
                 },
-                "date":"6:20 pm",
+                "date":"2023-01-17T14:06:30.409Z",
                 "sender":"glmanhtu@gmail.com"
              }
           ]
@@ -133,31 +133,31 @@
              {
                 "id":1,
                 "content":"Can you send me a link",
-                "date":"8:15 am",
+                "date":"2023-01-14T08:00:19.409Z",
                 "sender":"glmanhtu@gmail.com"
              },
              {
                 "id":2,
                 "content":"So i found this great video online",
-                "date":"1:00 pm",
+                "date":"2023-01-14T08:02:19.409Z",
                 "sender":"dylan@gmail.com"
              },
              {
                 "id":3,
                 "content":"It’s about stopping drugs",
-                "date":"1:05 pm",
+                "date":"2023-01-14T08:02:55.409Z",
                 "sender":"dylan@gmail.com"
              },
              {
                 "id":4,
                 "content":"Can you send me a link",
-                "date":"1:15 pm",
+                "date":"2023-01-14T08:03:02.409Z",
                 "sender":"glmanhtu@gmail.com"
              },
              {
                 "id":6,
                 "content":"Hey there, check this out",
-                "date":"1:30 pm",
+                "date":"2023-01-14T08:04:00.409Z",
                 "attachments":[
                    {
                       "id":14,
@@ -187,13 +187,13 @@
              {
                 "id":7,
                 "content":"Wow, really cool",
-                "date":"1:30 pm",
+                "date":"2023-01-14T08:04:25.409Z",
                 "sender":"glmanhtu@gmail.com"
              },
              {
                 "id":8,
                 "content":"You're welcome",
-                "date":"1:30 pm",
+                "date":"2023-01-14T08:05:19.409Z",
                 "sender":"dylan@gmail.com"
              }
           ]
@@ -215,43 +215,43 @@
              {
                 "id":1,
                 "content":"Hey there",
-                "date":"1:00 pm",
+                "date":"2023-01-16T09:00:19.409Z",
                 "sender":"glmanhtu@gmail.com"
              },
              {
                 "id":2,
                 "content":"I got a new dog",
-                "date":"2:00 pm",
+                "date":"2023-01-16T09:30:19.409Z",
                 "sender":"ahmed@gmail.com"
              },
              {
                 "id":3,
                 "content":"Oh, ok good to know.",
-                "date":"5:00 pm",
+                "date":"2023-01-16T09:32:19.409Z",
                 "sender":"glmanhtu@gmail.com"
              },
              {
                 "id":4,
                 "content":"It was great catching up with you the other day",
-                "date":"3:00 pm",
+                "date":"2023-01-17T06:00:19.409Z",
                 "sender":"allen@gmail.com"
              },
              {
                 "id":5,
                 "content":"Thank you very much.",
-                "date":"3:00 pm",
+                "date":"2023-01-17T06:05:19.409Z",
                 "sender":"glmanhtu@gmail.com"
              },
              {
                 "id":6,
                 "content":"Lets meet agian next week.",
-                "date":"5:00 pm",
+                "date":"2023-01-17T06:06:25.409Z",
                 "sender":"glmanhtu@gmail.com"
              },
              {
                 "id":7,
                 "content":"Ok next week then.",
-                "date":"5:00 pm",
+                "date":"2023-01-17T06:10:11.409Z",
                 "sender":"ahmed@gmail.com"
              }
           ]
@@ -273,13 +273,13 @@
              {
                 "id":1,
                 "content":"A truck collision turns a Florida highway into a silver sea of beer cans",
-                "date":"1:00 pm",
+                "date":"2023-01-17T21:00:12.409Z",
                 "sender":"glmanhtu@gmail.com"
              },
              {
                 "id":2,
                 "content":"Apple Watch Ultra and next-generation AirPods Pro available in stores Friday",
-                "date":"5:00 pm",
+                "date":"2023-01-17T21:01:39.409Z",
                 "sender":"glmanhtu@gmail.com"
              }
           ]

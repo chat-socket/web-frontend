@@ -2,6 +2,7 @@
 import { ArrowUturnLeftIcon, BookmarkIcon, BookmarkSquareIcon, TrashIcon } from "@heroicons/vue/24/outline";
 
 import linkifyStr from 'linkify-string';
+import moment from "moment";
 import type { Ref } from "vue";
 import { ref } from "vue";
 import { useContactsStore } from "../../../../stores/contacts";
@@ -121,7 +122,12 @@ const contacts = useContactsStore();
                 <!--date-->
                 <div>
                     <Typography variant="body-1" class="whitespace-pre">
-                        {{(props.message as Message).date}}
+                        {{moment(props.message.date).calendar({
+                            sameDay: 'hh:mm',
+                            lastDay: '[Yesterday] hh:mm',
+                            lastWeek: 'ddd hh:mm',
+                            sameElse: 'DD/MM/YYYY hh:mm'
+                        })}}
                     </Typography>
                 </div>
             </div>

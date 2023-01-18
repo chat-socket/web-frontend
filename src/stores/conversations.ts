@@ -2,6 +2,7 @@ import {defineStore} from "pinia";
 import conversationsData from "../assets/data/conversations.json";
 import achivedConversationsData from "../assets/data/archived.json";
 import {computed, ref, Ref} from "vue";
+import { plainToInstance, Type } from "class-transformer";
 
 
 export interface PreviewData {
@@ -24,34 +25,36 @@ export interface Recording {
     duration: string,
 };
 
-export interface Message {
-    id: number,
-    type?: string,
-    content?: string | Recording,
-    date: string,
-    sender: string,
-    replyTo?: number,
-    previewData?: PreviewData,
-    attachments?: Attachment[],
+export class Message {
+    id!: number;
+    type?: string;
+    content?: string | Recording;
+
+    @Type(() => Date)
+    date!: Date;
+    sender!: string;
+    replyTo?: number;
+    previewData?: PreviewData;
+    attachments?: Attachment[];
 };
 
-export interface Conversation {
-    id: number,
-    type: string,
-    name?: string,
-    avatar?: string,
-    admins?: string[],
-    contacts: string[],
-    messages: Message[],
-    pinnedMessage?: number,
-    pinnedMessageHidden?: boolean,
+export class Conversation {
+    id!: number;
+    type!: string;
+    name?: string;
+    avatar?: string;
+    admins?: string[];
+    contacts!: string[];
+    messages!: Message[];
+    pinnedMessage?: number;
+    pinnedMessageHidden?: boolean;
 };
 
 
 export const useConversationsStore = defineStore('conversations', {
     state: () => {
-        const conversations: Ref<Conversation[]> = ref(conversationsData.conversations); 
-        const archivedConversations: Ref<Conversation[] | undefined> = ref(achivedConversationsData.conversations);
+        const conversations: Ref<Conversation[]> = ref(plainToInstance(Conversation,  conversationsData.conversations)); 
+        const archivedConversations: Ref<Conversation[] | undefined> = ref(plainToInstance(Conversation,  achivedConversationsData.conversations));
 
         const activeConversationId: Ref<number | null> = ref(null);
         const conversationOpen: Ref<string | undefined> = ref(undefined);

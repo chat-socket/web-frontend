@@ -19,6 +19,7 @@
     "focus-trap": "^7.0.0",
     "linkify-string": "^4.0.2",
     "linkifyjs": "^4.0.2",
+    "moment": "^2.29.4",
     "oidc-client-ts": "^2.2.0",
     "pinia": "^2.0.22",
     "reflect-metadata": "^0.1.13",
