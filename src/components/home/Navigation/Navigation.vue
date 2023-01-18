@@ -21,7 +21,7 @@ let SkipLinkFocused = ref(false);
 
 // (event) change the active sidebar component when clicking on a NavLink
 const handleActiveSidebarComponentChange = (value: string) => {
-    chat.activeSidebarComponent = value;
+    chat.setCurrentActiveSidebarComponent(value);
 };
 </script>
 
@@ -37,21 +37,21 @@ const handleActiveSidebarComponentChange = (value: string) => {
                     <li>
                         <NavLink :icon="ChatBubbleOvalLeftIcon" title="Conversations" :notifications="3"
                             @click="() => handleActiveSidebarComponentChange('messages')"
-                            :active="chat.activeSidebarComponent === 'messages'" />
+                            :active="chat.conf.activeSidebarComponent === 'messages'" />
                     </li>
 
                     <!--notifications button-->
                     <li class="xs:hidden md:inline">
                         <NavLink :icon="ArchiveBoxIcon" title="Archived Conversations" 
                             @click="()=>handleActiveSidebarComponentChange('archived_conversations')"
-                            :active="chat.activeSidebarComponent === 'archived_conversations'" />
+                            :active="chat.conf.activeSidebarComponent === 'archived_conversations'" />
                     </li>
                     
                     <!--contacts list button-->
                     <li>
                         <NavLink :icon="UserIcon" title="Contacts"
                             @click="()=>handleActiveSidebarComponentChange('contacts')"
-                            :active="chat.activeSidebarComponent === 'contacts'" />
+                            :active="chat.conf.activeSidebarComponent === 'contacts'" />
                     </li>
 
                     <!--dropdown button small screen-->
@@ -76,14 +76,14 @@ const handleActiveSidebarComponentChange = (value: string) => {
                     <li>
                         <NavLink :icon="PhoneIcon" title="Call log" :notifications="1"
                             @click="()=>handleActiveSidebarComponentChange('phone')"
-                            :active="chat.activeSidebarComponent === 'phone'" />
+                            :active="chat.conf.activeSidebarComponent === 'phone'" />
                     </li>
 
                     <!--settings button small screen-->
                     <li class="xs:inline md:hidden">
                         <NavLink :icon="Cog6ToothIcon" title="Settings"
                             @click="()=>handleActiveSidebarComponentChange('settings')"
-                            :active="chat.activeSidebarComponent === 'settings'" />
+                            :active="chat.conf.activeSidebarComponent === 'settings'" />
                     </li>
                 </ul>
             </nav>
@@ -102,7 +102,7 @@ const handleActiveSidebarComponentChange = (value: string) => {
                     <li>
                         <NavLink :icon="Cog6ToothIcon" title="Settings"
                             @click="()=>handleActiveSidebarComponentChange('settings')"
-                            :active="chat.activeSidebarComponent === 'settings'" />
+                            :active="chat.conf.activeSidebarComponent === 'settings'" />
                     </li>
                 </ul>
             </nav>

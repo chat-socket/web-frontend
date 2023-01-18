@@ -15,8 +15,8 @@ const searchText: Ref<string> = ref('');
 
 // (event) switch between the rendered conversations.
 const handleConversationChange = (conversationId: number) => {
-    conversations.activeConversationId = conversationId;
-    conversations.conversationOpen = 'open';
+    conversations.setCurrentActiveConversation(conversationId);
+    conversations.setConversationOpen('open');
 };
 
 // the filterd list of conversations.
@@ -51,7 +51,7 @@ watch([searchText], () => {
 
                     <FadeTransition>
                         <component :is="ConversationsList" :filtered-conversations="filteredConversations"
-                            :active-id="(conversations.activeConversationId as number)"
+                            :active-id="(conversations.conf.activeConversationId as number)"
                             :handle-conversation-change="handleConversationChange"
                             :key="'archive'" />
                     </FadeTransition>

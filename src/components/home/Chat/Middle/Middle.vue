@@ -62,14 +62,6 @@ onMounted(() => {
     (container.value as HTMLElement).scrollTop = (container.value as HTMLElement).scrollHeight;
 });
 
-// get message to reply to.
-const getReplyToMessage = (message: MessageType) => {
-    if (message.replyTo) {
-        let replyToMessage = (props.activeConversation as Conversation).messages.find(item => item.id === message.replyTo);
-        return replyToMessage;
-    }
-};
-
 // provide the active conversation to all children
 provide('activeConversaion', props.activeConversation);
 </script>
@@ -82,7 +74,7 @@ provide('activeConversaion', props.activeConversation);
 
             <MessageBubble :message="message" :self="isSelf(message)" :follow-up="messageInfo.isFollowUp[index]"
                 :divider="messageInfo.useDivider[index]" :select-message-to-reply-to="props.selectMessageToReplyTo"
-                :reply-to-message="getReplyToMessage(message)" :handle-pin-message="handlePinMessage" />
+                :reply-to-message="conversations.getMessage(props.activeConversation!, message.replyTo)" />
         </div>
     </div>
 </template>

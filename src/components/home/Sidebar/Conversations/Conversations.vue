@@ -15,9 +15,11 @@ import ComposeModal from "../../modals/ComposeModal/ComposeModal.vue";
 import SidebarHeader from "../SidebarHeader.vue";
 import ConversationsList from "./ConversationsList.vue";
 import FadeTransition from "../../../reusables/transitions/FadeTransition.vue";
+import { useChatStore } from "../../../../stores/chat";
 
 
 const conversations = useConversationsStore();
+const chat = useChatStore();
 
 const searchText: Ref<string> = ref('');
 
@@ -35,8 +37,8 @@ watch([searchText], () => {
 
 // (event) switch between the rendered conversations.
 const handleConversationChange = (conversationId: number) => {
-    conversations.activeConversationId = conversationId;
-    conversations.conversationOpen = 'open';
+    conversations.setCurrentActiveConversation(conversationId);
+    conversations.setConversationOpen('open');
 };
 
 // (event) close the compose modal.
@@ -78,7 +80,7 @@ onMounted(() => {
 
                     <FadeTransition>
                         <component :is="ConversationsList" :filtered-conversations="filteredConversations"
-                            :active-id="(conversations.activeConversationId as number)"
+                            :active-id="(conversations.conf.activeConversationId as number)"
                             :handle-conversation-change="handleConversationChange"
                             :key="'active'" />
                     </FadeTransition>

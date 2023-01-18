@@ -14,15 +14,15 @@ const chat = useChatStore();
 
 // the selected sidebar component (e.g message/notifications/settings)
 const ActiveComponent = computed(() => {
-    if (chat.activeSidebarComponent === 'messages') {
+    if (chat.conf.activeSidebarComponent === 'messages') {
         return Conversations;
-    } else if (chat.activeSidebarComponent === 'contacts') {
+    } else if (chat.conf.activeSidebarComponent === 'contacts') {
         return Contacts;
-    } else if (chat.activeSidebarComponent === 'archived_conversations') {
+    } else if (chat.conf.activeSidebarComponent === 'archived_conversations') {
         return ArchivedConversations;
-    } else if (chat.activeSidebarComponent === 'phone') {
+    } else if (chat.conf.activeSidebarComponent === 'phone') {
         return Calls;
-    } else if (chat.activeSidebarComponent === 'settings') {
+    } else if (chat.conf.activeSidebarComponent === 'settings') {
         return Settings;
     }
 });
