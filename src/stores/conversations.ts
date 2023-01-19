@@ -49,6 +49,9 @@ export class Conversation {
     status!: string;
     admins?: string[];
     contacts!: string[];
+
+    @Type(() => Date)
+    lastSeen!: Date[];
     messages!: Message[];
 };
 

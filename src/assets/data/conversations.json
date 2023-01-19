@@ -8,6 +8,10 @@
              "glmanhtu@gmail.com"
           ],
           "status": "active",
+          "lastSeen": [
+            "2023-01-14T08:02:19.409Z",
+            "2023-01-17T14:03:10.409Z"
+          ],
           "messages":[
              {
                 "id":1,
@@ -130,6 +134,10 @@
              "dylan@gmail.com",
              "glmanhtu@gmail.com"
           ],
+          "lastSeen": [
+            "2023-01-14T08:02:19.409Z",
+            "2023-01-17T14:03:10.409Z"
+          ],
           "status": "active",
           "messages":[
              {
@@ -213,6 +221,11 @@
              "ahmed@gmail.com",
              "allen@gmail.com"
           ],
+          "lastSeen": [
+            "2023-01-14T08:02:19.409Z",
+            "2023-01-17T14:03:10.409Z",
+            "2023-01-17T14:03:10.409Z"
+          ],
           "status": "active",
           "messages":[
              {
@@ -271,6 +284,11 @@
              "glmanhtu@gmail.com",
              "ahmed@gmail.com",
              "allen@gmail.com"
+          ],
+          "lastSeen": [
+            "2023-01-14T08:02:19.409Z",
+            "2023-01-17T14:03:10.409Z",
+            "2023-01-17T14:03:10.409Z"
           ],
           "status": "active",
           "messages":[
