@@ -3,6 +3,7 @@
        {
           "id":3,
           "type":"couple",
+          "status": "archived",
           "contacts":[
              "dawn@gmail.com",
              "glmanhtu@gmail.com"
@@ -19,6 +20,7 @@
        {
           "id":4,
           "type":"couple",
+          "status": "archived",
           "contacts":[
              "allen@gmail.com",
              "glmanhtu@gmail.com"

@@ -7,6 +7,7 @@
              "elijah@gmail.com",
              "glmanhtu@gmail.com"
           ],
+          "status": "active",
           "messages":[
              {
                 "id":1,
@@ -129,6 +130,7 @@
              "dylan@gmail.com",
              "glmanhtu@gmail.com"
           ],
+          "status": "active",
           "messages":[
              {
                 "id":1,
@@ -211,6 +213,7 @@
              "ahmed@gmail.com",
              "allen@gmail.com"
           ],
+          "status": "active",
           "messages":[
              {
                 "id":1,
@@ -269,6 +272,7 @@
              "ahmed@gmail.com",
              "allen@gmail.com"
           ],
+          "status": "active",
           "messages":[
              {
                 "id":1,

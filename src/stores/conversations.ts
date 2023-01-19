@@ -44,6 +44,7 @@ export class Conversation {
     type!: string;
     name?: string;
     avatar?: string;
+    status!: string;
     admins?: string[];
     contacts!: string[];
     messages!: Message[];
