@@ -8,7 +8,6 @@ import { computed, Ref, ref, watch } from "vue";
 import FadeTransition from "../../../reusables/transitions/FadeTransition.vue";
 import ConversationsList from "./ConversationsList.vue";
 import NoConversation from "../../../reusables/emptyStates/NoConversation.vue";
-import { getName } from "../../../../utils";
 
 const conversations = useConversationsStore();
 conversations.fetchConversations(true);
@@ -22,7 +21,7 @@ const handleConversationChange = (conversation: Conversation) => {
 
 const filteredConversations = computed(() => {
     return conversations.conversations!.filter(
-        (conversation) => getName(conversation)?.toLowerCase().includes(searchText.value.toLowerCase())
+        (conversation) => conversations.getName(conversation)?.toLowerCase().includes(searchText.value.toLowerCase())
     );
 })
 
@@ -44,7 +43,7 @@ const filteredConversations = computed(() => {
             style="overflow-x:visible; overflow-y: scroll;">
             <Loading1 v-if="conversations.loading" />
 
-            <div v-if="!conversations.loading && conversations.conversationsFetched && filteredConversations!.length > 0">
+            <div v-if="!conversations.loading && conversations.isFetched() && filteredConversations!.length > 0">
 
                 <FadeTransition>
                     <component :is="ConversationsList" :filtered-conversations="filteredConversations"
@@ -54,7 +53,7 @@ const filteredConversations = computed(() => {
                 </FadeTransition>
             </div>
 
-            <div v-if="!conversations.loading && conversations.conversationsFetched && filteredConversations!.length === 0">
+            <div v-if="!conversations.loading && conversations.isFetched() && filteredConversations!.length === 0">
                 <NoConversation />
             </div>
         </div>

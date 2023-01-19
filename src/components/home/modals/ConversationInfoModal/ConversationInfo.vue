@@ -3,14 +3,15 @@ import { ArrowLeftOnRectangleIcon, PencilIcon, AtSymbolIcon, BellIcon, NoSymbolI
 import { ArrowUturnLeftIcon } from "@heroicons/vue/24/solid";
 import { computed, ref } from "vue";
 
-import { Conversation } from "../../../../stores/conversations";
+import { Conversation, useConversationsStore } from "../../../../stores/conversations";
 import { Contact } from "../../../../stores/contacts";
-import { getAvatar, getFullName, getName, getOddContact } from "../../../../utils";
+import { getFullName } from "../../../../utils";
 
 import InfoItem from "../../../reusables/InfoItem.vue";
 import Typography from "../../../reusables/Typography.vue";
 import ImageViewer from "./ImageViewer.vue";
 import IconButton from "../../../reusables/IconButton.vue";
+import useAuthStore from "../../../../stores/auth";
 
 const props = defineProps<{
     conversation?: Conversation,
@@ -20,11 +21,15 @@ const props = defineProps<{
 
 const openImageViewer = ref(false);
 
+const conversations = useConversationsStore();
+
+const auth = useAuthStore();
+
 const imageUrl = computed(() => {
     if (props.contact) {
         return props.contact.avatar;
     } else {
-        return getAvatar(props.conversation);
+        return conversations.getAvatar(props.conversation!);
     }
 })
 </script>
@@ -36,7 +41,7 @@ const imageUrl = computed(() => {
             <Typography variant="heading-1" id="modal-title" class="outline-none" tabindex="0">
                 <span v-if="(props.conversation as Conversation).type === 'couple' || props.contact">Contact</span>
                 <span v-else-if="(props.conversation as Conversation).type === 'group'">Group</span>
-                <span v-else-if="(props.conversation as Conversation).type === 'boradcast'">Broadcast</span>
+                <span v-else-if="(props.conversation as Conversation).type === 'broadcast'">Broadcast</span>
                 Info
             </Typography>
 
@@ -75,7 +80,7 @@ const imageUrl = computed(() => {
                     </button>
 
                     <button v-else @click="openImageViewer = true" class="outline-none" aria-label="view avatar">
-                        <div :style="{ backgroundImage: `url(${getAvatar(props.conversation)})`}"
+                        <div :style="{ backgroundImage: `url(${conversations.getAvatar(props.conversation!)})`}"
                             class="w-[38px] h-[38px] rounded-full bg-cover bg-center">
                         </div>
                     </button>
@@ -90,11 +95,11 @@ const imageUrl = computed(() => {
                             </span>
 
                             <span v-else>
-                                {{getName(props.conversation)}}
+                                {{conversations.getName(props.conversation!)}}
                             </span>
                         </Typography>
 
-                        <IconButton v-if="['group', 'boradcast'].includes((props.conversation as Conversation).type)">
+                        <IconButton v-if="['group', 'broadcast'].includes((props.conversation as Conversation).type)">
                             <PencilIcon class="w-5 h-5 text-gray-400"
                                 @click="$emit('active-page-change', {tabName: 'edit-group', animationName: 'slide-left'})" />
                         </IconButton>
@@ -107,7 +112,7 @@ const imageUrl = computed(() => {
                         </span>
 
                         <!--or number of group members-->
-                        <span v-else-if="['group', 'boradcast'].includes((props.conversation as Conversation).type)">
+                        <span v-else-if="['group', 'broadcast'].includes((props.conversation as Conversation).type)">
                             {{(props.conversation as Conversation).contacts.length}} Contacts
                         </span>
                     </Typography>
@@ -120,11 +125,11 @@ const imageUrl = computed(() => {
             <!--(contact) email-->
             <div v-if="(conversation as Conversation).type === 'couple' || props.contact"
                 class="flex px-5 pb-5 items-center">
-                <InfoItem :icon="AtSymbolIcon" :title="getOddContact(props.conversation!)" />
+                <InfoItem :icon="AtSymbolIcon" :title="auth.getOtherMembers(props.conversation!.contacts)[0]" />
             </div>
 
             <!--(group) members-->
-            <div v-if="['group', 'boradcast'].includes((props.conversation as Conversation).type) && !props.contact"
+            <div v-if="['group', 'broadcast'].includes((props.conversation as Conversation).type) && !props.contact"
                 class="px-5 flex items-center pb-5">
                 <InfoItem :icon="UserIcon" title="members" link chevron
                     @click="$emit('active-page-change', {tabName: 'members', animationName: 'slide-left'})" />
@@ -155,7 +160,7 @@ const imageUrl = computed(() => {
             </div>
 
             <!--exit group-->
-            <div v-if="['group', 'boradcast'].includes((props.conversation as Conversation).type) && !props.contact"
+            <div v-if="['group', 'broadcast'].includes((props.conversation as Conversation).type) && !props.contact"
                 class="px-5 pt-5 flex items-center group">
                 <InfoItem :icon="ArrowLeftOnRectangleIcon" title="exit group" link danger />
             </div>

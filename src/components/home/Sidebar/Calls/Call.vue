@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { PhoneIcon, PhoneArrowDownLeftIcon, PhoneArrowUpRightIcon, PhoneXMarkIcon } from "@heroicons/vue/24/solid";
 import { computed } from "vue";
+import useAuthStore from "../../../../stores/auth";
 
-import { Call } from "../../../../stores/calls";
+import { Call, useCallsStore } from "../../../../stores/calls";
 import { useContactsStore } from "../../../../stores/contacts";
-import { getCallName, getOtherMembers } from "../../../../utils";
 
 import Typography from "../../../reusables/Typography.vue";
 import CallAvatar from "./CallAvatar.vue";
@@ -17,8 +17,10 @@ const props = defineProps<{
     endCall?: () => void,
 }>();
 
+const auth = useAuthStore();
+const calls = useCallsStore();
 const members = computed(() => {
-    return getOtherMembers(props.call);
+    return auth.getOtherMembers(props.call.members);
 });
 
 const handleOpenInfoModal = () => {
@@ -28,11 +30,12 @@ const handleOpenInfoModal = () => {
 };
 
 const contacts = useContactsStore();
+
 </script>
 
 <template>
     <div>
-        <component :is="props.active ? 'div': 'button'" :aria-label="'voice call with ' + getCallName(props.call, true)"
+        <component :is="props.active ? 'div': 'button'" :aria-label="'voice call with ' + calls.getCallName(props.call, true)"
             @click="handleOpenInfoModal"
             class="w-full h-[92px] px-5 py-6 mb-3 flex rounded  focus:outline-none transition duration-500 ease-out"
             :class="props.active 
@@ -60,12 +63,12 @@ const contacts = useContactsStore();
                         <div class="grow mb-4 text-start">
                             <button v-if="props.active" class="block" @click="props.openVoiceCallModall">
                                 <Typography variant="heading-2">
-                                    {{getCallName(props.call)}}
+                                    {{calls.getCallName(props.call)}}
                                 </Typography>
                             </button>
 
                             <Typography v-else variant="heading-2">
-                                {{getCallName(props.call)}}
+                                {{calls.getCallName(props.call)}}
                             </Typography>
                         </div>
 

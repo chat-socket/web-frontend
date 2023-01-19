@@ -19,10 +19,10 @@ const contacts = useContactsStore();
 
         <!--contacts-->
         <div class="overflow-y-scroll scrollbar scrollbar-hidden max-h-[200px] mb-5">
-            <ContactItem v-if="contacts.isLoaded"
+            <ContactItem v-if="!contacts.loading && contacts.isFetched"
                 v-for="(contact, index) in contacts.contacts" :key="index" :contact="contact" />
 
-            <Loading1 v-if="!contacts.isLoaded" v-for="item in 3" />
+            <Loading1 v-if="contacts.loading" />
         </div>
 
         <div class="flex px-5 mt-5 pb-6">

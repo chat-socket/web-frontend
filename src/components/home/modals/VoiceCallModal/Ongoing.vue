@@ -2,8 +2,7 @@
 import { ChatBubbleBottomCenterTextIcon, PhoneIcon, SpeakerXMarkIcon, UserPlusIcon } from "@heroicons/vue/24/solid";
 
 import { Contact } from "../../../../stores/contacts";
-import { Call } from "../../../../stores/calls";
-import { getCallName } from "../../../../utils";
+import { Call, useCallsStore } from "../../../../stores/calls";
 
 import Typography from "../../../reusables/Typography.vue";
 import CallAvatar from "../../Sidebar/Calls/CallAvatar.vue";
@@ -14,6 +13,8 @@ const props = defineProps<{
     activeCall: Call,
     closeModal: () => void,
 }>();
+
+const calls = useCallsStore();
 </script>
 
 <template>
@@ -26,7 +27,7 @@ const props = defineProps<{
             </div>
 
             <Typography variant="heading-2" class="mb-4 outline-none" tabindex="0">
-                {{getCallName((activeCall as Call))}}
+                {{calls.getCallName(activeCall)}}
             </Typography>
 
             <Typography variant="body-3" no-color class="outline-none text-green-300" tabindex="0">

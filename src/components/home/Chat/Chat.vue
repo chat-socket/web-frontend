@@ -14,9 +14,9 @@ const conversations = useConversationsStore();
 const activeChatComponent = computed(() => {
     if (conversations.loading)
         return loading3;
-    else if (conversations.conversationsFetched && conversations.activeConversation)
+    else if (conversations.isFetched() && conversations.activeConversation)
         return SelectedChat;
-    else if (conversations.conversationsFetched && !conversations.loading)
+    else if (conversations.isFetched() && !conversations.loading)
         return NoChatSelected;
 });
 

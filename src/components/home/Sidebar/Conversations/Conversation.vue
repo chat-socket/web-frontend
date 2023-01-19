@@ -5,7 +5,7 @@ import moment from 'moment'
 import { computed, ref } from "vue";
 
 import { Attachment, Conversation, Recording, useConversationsStore } from "../../../../stores/conversations";
-import { getAvatar, getName, hasAttachments, shorten } from "../../../../utils";
+import { hasAttachments, shorten } from "../../../../utils";
 
 import Dropdown from "../../../reusables/Dropdown.vue";
 import DropdownLink from "../../../reusables/DropdownLink.vue";
@@ -60,7 +60,7 @@ const lastMessage = computed(() => props.conversation.messages[props.conversatio
 
 <template>
     <div>
-        <button :aria-label="'conversation with' + getName(props.conversation) " tabindex="0"
+        <button :aria-label="'conversation with' + conversations.getName(props.conversation) " tabindex="0"
             v-click-outside="contextConfig" @contextmenu.prevent="handleShowContextMenu"
             @click="handleSelectConversation" class="w-full h-[92px] px-5 py-6 mb-3 flex rounded focus:bg-emerald-50  dark:active:bg-gray-600 dark:focus:bg-gray-600 dark:hover:bg-gray-600
             hover:bg-emerald-50 active:bg-emerald-100 focus:outline-none transition duration-500 ease-out"
@@ -68,7 +68,7 @@ const lastMessage = computed(() => props.conversation.messages[props.conversatio
 
             <!--profile image-->
             <div class="mr-4">
-                <div :style="{ backgroundImage: `url(${getAvatar(props.conversation)})`}"
+                <div :style="{ backgroundImage: `url(${conversations.getAvatar(props.conversation)})`}"
                     class="w-7 h-7 rounded-full bg-cover bg-center">
                 </div>
             </div>
@@ -79,7 +79,7 @@ const lastMessage = computed(() => props.conversation.messages[props.conversatio
                     <div class="flex items-start">
                         <div class="grow mb-4 text-start">
                             <Typography variant="heading-2">
-                                {{getName(props.conversation)}}
+                                {{conversations.getName(props.conversation)}}
                             </Typography>
                         </div>
 

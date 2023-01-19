@@ -3,7 +3,9 @@ import conversationsData from "../assets/data/conversations.json";
 import achivedConversationsData from "../assets/data/archived.json";
 import {computed, ref, Ref} from "vue";
 import { plainToInstance, Type } from "class-transformer";
-import { parseJSON, sleep } from "../utils";
+import { getFullName, parseJSON, sleep } from "../utils";
+import { useContactsStore } from "./contacts";
+import useAuthStore from "./auth";
 
 
 export interface PreviewData {
@@ -65,10 +67,15 @@ export const useConversationsStore = defineStore('conversations', {
         const loading: Ref<boolean> = ref(false);
         const conversationsFetched: Ref<boolean> = ref(false);
         const activeConversation: Ref<Conversation | undefined> = ref(undefined);
+        const contacts = useContactsStore();
+        contacts.fetchContacts();
+        const auth = useAuthStore();
         
         return {
             loading,    
             conf,
+            contacts,
+            auth,
             conversationsFetched,
             activeConversation,
             conversations,
@@ -112,6 +119,28 @@ export const useConversationsStore = defineStore('conversations', {
                 }
             }
             return undefined;
+        },
+
+        isFetched: (state) => () => {
+            return state.conversationsFetched && state.contacts.isFetched;
+        },
+
+        getAvatar: (state) => (conversation: Conversation) => {
+            if (['group', 'broadcast'].includes((conversation as Conversation).type)) {
+                return conversation?.avatar;
+            } else {
+                const oddContacts = state.auth.getOtherMembers(conversation.contacts);
+                return state.contacts.getContact(oddContacts[0])?.avatar
+            }
+        },
+
+        getName: (state) => (conversation: Conversation) => {
+            if (['group', 'broadcast'].includes((conversation as Conversation).type)) {
+                return conversation?.name;
+            } else {
+                const oddContacts = state.auth.getOtherMembers(conversation.contacts);
+                return getFullName(state.contacts.getContact(oddContacts[0])!);
+            }
         }
     }
 })

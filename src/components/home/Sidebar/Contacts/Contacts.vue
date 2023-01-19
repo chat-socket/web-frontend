@@ -64,10 +64,10 @@ watch(searchText, () => {
         <!--content-->
         <div ref="contactContainer" class="w-full h-full scroll-smooth scrollbar-hidden"
             style="overflow-x:visible; overflow-y: scroll;">
-            <Loading2 v-if="!contacts.isLoaded" v-for="item in 5" />
+            <Loading2 v-if="contacts.loading" />
 
             <ContactGroups
-                v-else-if="contacts.isLoaded && contacts.contacts.length > 0"
+                v-else-if="!contacts.loading && contacts.isFetched && contacts.contacts.length > 0"
                 :contactGroups="filteredContactGroups"
                 :bottom-edge="(contactContainer as HTMLElement)?.getBoundingClientRect().bottom" />
 

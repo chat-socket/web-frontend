@@ -4,7 +4,6 @@ import { ref } from "vue";
 
 import { Conversation, useConversationsStore } from "../../../../stores/conversations";
 import { Call, useCallsStore } from "../../../../stores/calls";
-import { getAvatar, getName } from "../../../../utils";
 
 import Dropdown from "../../../reusables/Dropdown.vue";
 import DropdownLink from "../../../reusables/DropdownLink.vue";
@@ -14,6 +13,7 @@ import ConversationInfoModal from "../../modals/ConversationInfoModal/Conversati
 import SearchModal from "../../modals/SearchModal.vue";
 import VoiceCallModal from "../../modals/VoiceCallModal/VoiceCallModal.vue";
 import { ACTIVECALL } from "../../../../stores/fakeData";
+import { useContactsStore } from "../../../../stores/contacts";
 
 const props = defineProps<{
     activeConversation?: Conversation,
@@ -21,6 +21,7 @@ const props = defineProps<{
 
 const conversations = useConversationsStore();
 const calls = useCallsStore();
+const contacts = useContactsStore();
 
 const showDropdown = ref(false);
 
@@ -77,7 +78,7 @@ const handleCloseVoiceCallModal = (endCall: boolean) => {
 <template>
     <div>
         <!--Top section-->
-        <div class="w-full px-5 py-6 flex justify-center items-center">
+        <div class="w-full px-5 py-6 flex justify-center items-center" v-if="!contacts.loading && contacts.isFetched">
             <!--back button-->
             <div class="group mr-4 md:hidden">
                 <IconButton class="w-7 h-7" @click="handleCloseConversation">
@@ -86,10 +87,10 @@ const handleCloseVoiceCallModal = (endCall: boolean) => {
                 </IconButton>
             </div>
 
-            <div v-if="!conversations.loading && conversations.conversationsFetched && conversations.activeConversation" class="flex grow">
+            <div v-if="!conversations.loading && conversations.isFetched() && conversations.activeConversation" class="flex grow">
                 <!--avatar-->
                 <button class="mr-5 outline-none" @click="() => openInfo = true" aria-label="profile avatar">
-                    <div :style="{ backgroundImage: `url(${getAvatar(activeConversation)})`}"
+                    <div :style="{ backgroundImage: `url(${conversations.getAvatar(activeConversation!)})`}"
                         class="w-[36px] h-[36px] rounded-full bg-cover bg-center">
                     </div>
                 </button>
@@ -98,7 +99,7 @@ const handleCloseVoiceCallModal = (endCall: boolean) => {
                 <div class="flex flex-col">
                     <Typography variant="heading-2" @click="() => openInfo = true" class="mb-2 outline cursor-pointer"
                         tabindex="0">
-                        {{getName(activeConversation)}}
+                        {{conversations.getName(activeConversation!)}}
                     </Typography>
 
                     <Typography variant="body-2" class="font-extralight" tabindex="0"
@@ -108,7 +109,7 @@ const handleCloseVoiceCallModal = (endCall: boolean) => {
                 </div>
             </div>
 
-            <div class="flex" :class="{'hidden': conversations.loading && !conversations.conversationsFetched}">
+            <div class="flex" :class="{'hidden': conversations.loading && !conversations.isFetched()}">
                 <!--search button-->
                 <IconButton @click="openSearch = true" aria-label="Search messages" class="group w-7 h-7 mr-3">
                     <MagnifyingGlassIcon class="w-[20px] h-[20px] text-gray-300 group-hover:text-emerald-300" />

@@ -2,6 +2,7 @@ import {defineStore} from "pinia";
 import contactsData from "../assets/data/contacts.json";
 import {computed, ref, Ref} from "vue";
 import { plainToInstance, Type } from 'class-transformer';
+import { sleep } from "../utils";
 
 
 export class Contact {
@@ -24,7 +25,9 @@ export interface ContactGroup {
 
 export const useContactsStore = defineStore('contacts', {
     state: () => {
-        const contacts: Ref<Contact[]> = ref(plainToInstance(Contact, contactsData.contacts))
+        const contacts: Ref<Contact[]> = ref([])
+        const loading: Ref<boolean> = ref(false);
+        const isFetched: Ref<boolean> = ref(false);
 
         const contactMap: Ref<Map<string, Contact>> = computed(() => {
             let map: Map<string, Contact> = new Map();
@@ -67,18 +70,30 @@ export const useContactsStore = defineStore('contacts', {
         });
 
         return {
+            loading,
+            isFetched,
             contacts,
             contactGroups,
             contactMap
         }
     },
     actions: {
-    },
-    getters: {
-        isLoaded(state) {
-            return true;
+        async fetchContacts() {
+            if (!this.isFetched) {
+                this.loading = true;
+                await sleep(500);
+                this.contacts = plainToInstance(Contact, contactsData.contacts);
+                this.loading = false;
+                this.isFetched = true;
+            }
         },
 
+        async forceFetchingContacts() {
+            this.isFetched = false;
+            return this.fetchContacts();
+        }
+    },
+    getters: {
         getContact: (state) => (contactId: string | undefined) => {
             if (contactId === undefined) {
                 return undefined;

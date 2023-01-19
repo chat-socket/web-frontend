@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
+import useAuthStore from "../../../../stores/auth";
 
 import { Call, useCallsStore } from "../../../../stores/calls";
-import { getOtherMembers } from "../../../../utils";
 
 import FadeTransition from "../../../reusables/transitions/FadeTransition.vue";
 import Modal from "../Modal.vue";
@@ -15,9 +15,10 @@ const props = defineProps<{
 }>();
 
 const calls = useCallsStore();
+const auth = useAuthStore();
 
 const members = computed(() => {
-    return getOtherMembers((calls.activeCall as Call))
+    return auth.getOtherMembers(calls.activeCall!.members);
 });
 
 // determine the modal width based on the active component

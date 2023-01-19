@@ -18,10 +18,10 @@ const contacts = useContactsStore();
 
         <!--contacts-->
         <div class="overflow-y-scroll scrollbar scrollbar-hidden max-h-[200px]">
-            <Loading1 v-if="!contacts.isLoaded" v-for="item in 3" />
+            <Loading1 v-if="contacts.loading" />
 
             <ContactItem
-                v-else-if="contacts.isLoaded && (contacts.contacts as Contact[])?.length > 0"
+                v-else-if="!contacts.loading && contacts.isFetched && contacts.contacts!.length > 0"
                 v-for="(contact, index) in contacts.contacts" :key="index" :contact="contact" />
 
             <NoContacts vertical v-else />

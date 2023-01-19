@@ -45,7 +45,7 @@ const handleOpenInfoModal = (call: CallType) => {
         <!--content-->
         <div ref="contactContainer" class="w-full h-full scroll-smooth scrollbar-hidden"
             style="overflow-x:visible; overflow-y: scroll;">
-            <Loading1 v-if="!calls.isLoaded" v-for="item in 6" />
+            <Loading1 v-if="!calls.isLoaded" />
 
             <div v-else>
                 <ExpandTransition>

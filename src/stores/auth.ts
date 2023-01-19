@@ -66,6 +66,18 @@ const useAuthStore = defineStore("auth", {
         login() {
             this.userManager.signinRedirect();
         },
+    },
+
+    getters: {
+        getOtherMembers: (state) => (members: string[]) => {
+            let otherMembers = [];
+            for (let member of members) {
+                if (member !== (state.user as User).id) {
+                    otherMembers.push(member);
+                }
+            }
+            return otherMembers;
+        }
     }
 });
 

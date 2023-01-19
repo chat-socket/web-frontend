@@ -5,7 +5,6 @@ import { computed, Ref } from "vue";
 import { ref, watch, onMounted } from "vue";
 
 import { useConversationsStore, Conversation as ConversationType } from "../../../../stores/conversations";
-import { getName } from "../../../../utils";
 
 import NoConversation from "../../../reusables/emptyStates/NoConversation.vue";
 import IconButton from "../../../reusables/IconButton.vue";
@@ -15,7 +14,6 @@ import ComposeModal from "../../modals/ComposeModal/ComposeModal.vue";
 import SidebarHeader from "../SidebarHeader.vue";
 import ConversationsList from "./ConversationsList.vue";
 import FadeTransition from "../../../reusables/transitions/FadeTransition.vue";
-import { useChatStore } from "../../../../stores/chat";
 
 
 const conversations = useConversationsStore();
@@ -28,7 +26,7 @@ const composeOpen = ref(false);
 
 const filteredConversations = computed(() => {
     return conversations.conversations!.filter(
-        (conversation) => getName(conversation)?.toLowerCase().includes(searchText.value.toLowerCase())
+        (conversation) => conversations.getName(conversation)?.toLowerCase().includes(searchText.value.toLowerCase())
     );
 })
 
@@ -72,7 +70,7 @@ onMounted(() => {
             <Loading1 v-if="conversations.loading" />
 
             <div
-                v-if="!conversations.loading && conversations.conversationsFetched && filteredConversations!.length > 0">
+                v-if="!conversations.loading && conversations.isFetched() && filteredConversations!.length > 0">
 
                 <FadeTransition>
                     <component :is="ConversationsList" :filtered-conversations="filteredConversations"
@@ -82,7 +80,7 @@ onMounted(() => {
                 </FadeTransition>
             </div>
 
-            <div v-if="!conversations.loading && conversations.conversationsFetched && filteredConversations!.length === 0">
+            <div v-if="!conversations.loading && conversations.isFetched() && filteredConversations!.length === 0">
                 <NoConversation />
             </div>
         </div>
