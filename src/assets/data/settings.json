@@ -8,13 +8,13 @@
         {
           "id":1,
           "type":"text",
-          "value":"Dawn",
+          "value":"Manh Tu",
           "title":"First name"
         },
         {
           "id":2,
           "type":"text",
-          "value":"Sabrina",
+          "value":"VU",
           "title":"Last name"
         },
         {
@@ -55,7 +55,7 @@
           "type":"switch",
           "value":false,
           "title":"Private Messages",
-          "description":"Recive messages from non-contacts"
+          "description":"Receive messages from non-contacts"
         }
       ]
     },

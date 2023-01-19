@@ -5,19 +5,34 @@ import jwt_decode from "jwt-decode";
 import { ref } from "vue";
 import { USER } from "./fakeData";
 
-export interface User {
-    id: string,
-    firstName: string,
-    lastName: string,
-    email: string,
-    avatar: string,
-    token: string
+export class User {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    avatar: string | null;
+    token: string;
+    oidcUser: OidcUser;
+
+    constructor(user: OidcUser) {
+        this.id = user.profile.email!;
+        this.firstName = user.profile.given_name!;
+        this.lastName = user.profile.family_name!;
+        this.email = user.profile.email!;
+        this.avatar = user.profile.picture!;
+        this.token = user.access_token;
+        this.oidcUser = user;
+    }
+
+    expired() {
+        return this.oidcUser.expired;
+    }
 };
 
 const useAuthStore = defineStore("auth", {
     state: () => {
         const userStore = new WebStorageStateStore({ store: window.localStorage });
-        const user: Ref<User | undefined> = ref(USER);
+        const user: Ref<User | undefined> = ref(undefined);
 
         const configuration = {
             'authority': import.meta.env.VITE_OAUTH_ISSUER,
@@ -37,19 +52,16 @@ const useAuthStore = defineStore("auth", {
         userManager.events.addUserLoaded(newUser => {
             console.log("USER LOADED EVENT");
             userManager.storeUser(newUser);
+            user.value = new User(newUser);
           });
 
         userManager.getUser().then((oidcUser) => {
             if (oidcUser && !oidcUser.expired) {
-                // user.value = {email: oidcUser.profile.email!}
                 console.log("USER LOGGED IN");
-                console.log(oidcUser);
+                user.value = new User(oidcUser);
             }
         });
-        userManager.events.addSilentRenewError(error => {
-            console.log("ERROR RENEWING ACCESS TOKEN.");
-            console.log(error);
-        })
+
 
         return {
             userManager,
@@ -61,6 +73,16 @@ const useAuthStore = defineStore("auth", {
         login() {
             this.userManager.signinRedirect();
         },
+
+        logout() {
+            // Currently Spring authorization server hasn't supported OIDC Connect logout functionality yet
+            // See: https://github.com/spring-projects/spring-authorization-server/issues/266
+            // this.userManager.signoutRedirect();
+            localStorage.clear();
+            sessionStorage.clear();
+            this.user = undefined;
+            window.location.href = "/";
+        }
     },
 
     getters: {

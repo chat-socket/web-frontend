@@ -3,6 +3,7 @@ import { ArrowLeftOnRectangleIcon, ArrowPathIcon, InformationCircleIcon } from "
 import Dropdown from "../../reusables/Dropdown.vue";
 import DropdownLink from "../../reusables/DropdownLink.vue";
 import { RouterLink } from 'vue-router';
+import useAuthStore from "../../../stores/auth";
 
 const props = defineProps<{
     showDropdown: boolean,
@@ -15,6 +16,8 @@ const handleCloseOnClickOutside = (event: Event) => {
         props.handleCloseDropdown();
     }
 };
+
+const auth = useAuthStore();
 </script>
 
 
@@ -39,10 +42,10 @@ const handleCloseOnClickOutside = (event: Event) => {
 
         <DropdownLink label="Logout" :handle-click="props.handleCloseDropdown"
             class="text-red-500 hover:bg-red-100 active:bg-red-100 dark:text-red-500">
-            <RouterLink to="/access/sign-in/" class="w-full flex items-center justify-start">
+            <div v-on:click="auth.logout()" class="w-full flex items-center justify-start">
                 <ArrowLeftOnRectangleIcon class="h-5 w-5 mr-3 text-red-500" />
                 Logout
-            </RouterLink>
+            </div>
         </DropdownLink>
     </Dropdown>
 </template>

@@ -2,9 +2,18 @@
 
 import { onMounted, onUnmounted, ref } from 'vue';
 import FadeTransition from './components/reusables/transitions/FadeTransition.vue';
-import {useSettingsStore} from "./stores/settings";
+import router from './router';
+import useAuthStore from './stores/auth';
+import { useSettingsStore } from "./stores/settings";
 
 const settings = useSettingsStore();
+const auth = useAuthStore();
+
+auth.userManager.events.addSilentRenewError(error => {
+    console.log("ERROR RENEWING ACCESS TOKEN.");
+    auth.logout();
+    router.push("/about");
+})
 
 // fix height on mobile screens
 // todo add video calling
