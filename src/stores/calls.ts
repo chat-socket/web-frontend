@@ -22,6 +22,7 @@ export const useCallsStore = defineStore('calls', {
         const calls: Ref<Call[]> = ref(callsData.calls);
         const activeCall: Ref<Call | undefined> = ref(activeCallData);
         const contacts = useContactsStore();
+        contacts.fetchContacts();
         const auth = useAuthStore();
         const callMinimized = ref(false);
         const openVoiceCall = ref(false);
