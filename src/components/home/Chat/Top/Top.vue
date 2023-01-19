@@ -86,7 +86,7 @@ const handleCloseVoiceCallModal = (endCall: boolean) => {
                 </IconButton>
             </div>
 
-            <div v-if="conversations.isLoaded" class="flex grow">
+            <div v-if="!conversations.loading && conversations.conversationsFetched && conversations.activeConversation" class="flex grow">
                 <!--avatar-->
                 <button class="mr-5 outline-none" @click="() => openInfo = true" aria-label="profile avatar">
                     <div :style="{ backgroundImage: `url(${getAvatar(activeConversation)})`}"
@@ -108,7 +108,7 @@ const handleCloseVoiceCallModal = (endCall: boolean) => {
                 </div>
             </div>
 
-            <div class="flex" :class="{'hidden': !conversations.isLoaded}">
+            <div class="flex" :class="{'hidden': conversations.loading && !conversations.conversationsFetched}">
                 <!--search button-->
                 <IconButton @click="openSearch = true" aria-label="Search messages" class="group w-7 h-7 mr-3">
                     <MagnifyingGlassIcon class="w-[20px] h-[20px] text-gray-300 group-hover:text-emerald-300" />

@@ -1,32 +1,31 @@
 <script setup lang="ts">
-import { useConversationsStore, Conversation as ConversationType } from "../../../../stores/conversations";
+import { useConversationsStore, Conversation as ConversationType, Conversation } from "../../../../stores/conversations";
 
 import Loading1 from "../../../reusables/loading/Loading1.vue";
 import SidebarHeader from "../SidebarHeader.vue";
 import SearchInput from "../../../reusables/SearchInput.vue";
-import { Ref, ref, watch } from "vue";
+import { computed, Ref, ref, watch } from "vue";
 import FadeTransition from "../../../reusables/transitions/FadeTransition.vue";
 import ConversationsList from "./ConversationsList.vue";
 import NoConversation from "../../../reusables/emptyStates/NoConversation.vue";
 import { getName } from "../../../../utils";
 
 const conversations = useConversationsStore();
+conversations.fetchConversations(true);
 const searchText: Ref<string> = ref('');
 
 // (event) switch between the rendered conversations.
-const handleConversationChange = (conversationId: number) => {
-    conversations.setCurrentActiveConversation(conversationId);
+const handleConversationChange = (conversation: Conversation) => {
+    conversations.setCurrentActiveConversation(conversation);
     conversations.setConversationOpen('open');
 };
 
-// the filterd list of conversations.
-const filteredConversations: Ref<ConversationType[] | undefined> = ref(conversations.archivedConversations);
-
-watch([searchText], () => {
-    filteredConversations.value = conversations.archivedConversations?.filter(
+const filteredConversations = computed(() => {
+    return conversations.conversations!.filter(
         (conversation) => getName(conversation)?.toLowerCase().includes(searchText.value.toLowerCase())
     );
-});
+})
+
 </script>
 
 <template>
@@ -43,23 +42,20 @@ watch([searchText], () => {
         <!--conversations-->
         <div role="list" aria-label="conversations" class="w-full h-full scroll-smooth scrollbar-hidden"
             style="overflow-x:visible; overflow-y: scroll;">
-            <Loading1 v-if="!conversations.isLoaded" v-for="item in 6" />
+            <Loading1 v-if="conversations.loading" />
 
-            <div v-else>
-                <div
-                    v-if="conversations.isLoaded && filteredConversations!.length > 0">
+            <div v-if="!conversations.loading && conversations.conversationsFetched && filteredConversations!.length > 0">
 
-                    <FadeTransition>
-                        <component :is="ConversationsList" :filtered-conversations="filteredConversations"
-                            :active-id="(conversations.conf.activeConversationId as number)"
-                            :handle-conversation-change="handleConversationChange"
-                            :key="'archive'" />
-                    </FadeTransition>
-                </div>
+                <FadeTransition>
+                    <component :is="ConversationsList" :filtered-conversations="filteredConversations"
+                        :active-id="(conversations.conf.activeConversationId as number)"
+                        :handle-conversation-change="handleConversationChange"
+                        :key="'archive'" />
+                </FadeTransition>
+            </div>
 
-                <div v-else>
-                    <NoConversation v-if="(filteredConversations as ConversationType[]).length === 0" />
-                </div>
+            <div v-if="!conversations.loading && conversations.conversationsFetched && filteredConversations!.length === 0">
+                <NoConversation />
             </div>
         </div>
     </div>

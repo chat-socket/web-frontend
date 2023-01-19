@@ -4,7 +4,7 @@ import type { Ref } from "vue";
 import moment from 'moment'
 import { computed, ref } from "vue";
 
-import { Attachment, Conversation, Recording } from "../../../../stores/conversations";
+import { Attachment, Conversation, Recording, useConversationsStore } from "../../../../stores/conversations";
 import { getAvatar, getName, hasAttachments, shorten } from "../../../../utils";
 
 import Dropdown from "../../../reusables/Dropdown.vue";
@@ -14,10 +14,15 @@ import Typography from "../../../reusables/Typography.vue";
 const props = defineProps<{
     conversation: Conversation,
     isActive?: boolean,
-    handleConversationChange?: (conversationId: number) => void,
+    handleConversationChange?: (conversation: Conversation) => void,
 }>();
 
 const showContextMenu = ref(false);
+
+const conversations = useConversationsStore();
+if (conversations.conf.activeConversationId === props.conversation.id) {
+    conversations.setCurrentActiveConversation(props.conversation);
+}
 
 const contextMenuCordinations: Ref<{ x: number, y: number } | undefined> = ref();
 
@@ -46,7 +51,7 @@ const handleSelectConversation = () => {
     showContextMenu.value = false;
 
     if (props.handleConversationChange)
-        props.handleConversationChange(props.conversation.id);
+        props.handleConversationChange(props.conversation);
 };
 
 // last message in conversation to display

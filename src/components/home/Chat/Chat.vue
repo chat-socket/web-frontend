@@ -6,29 +6,17 @@ import { useConversationsStore } from "../../../stores/conversations";
 import loading3 from "../../reusables/loading/loading3.vue";
 import NoChatSelected from "../../reusables/emptyStates/NoChatSelected.vue";
 import SelectedChat from "./SelectedChat.vue";
-import { useChatStore } from "../../../stores/chat";
 
 
 const conversations = useConversationsStore();
-const chat = useChatStore();
-
-// search the selected conversation using activeConversationId.
-const activeConversation = computed(() => {
-    let activeConversation = conversations.conversations?.find(conversation => conversation.id === conversations.conf.activeConversationId);
-
-    if (activeConversation)
-        return activeConversation;
-    else
-        return conversations.archivedConversations?.find(conversation => conversation.id === conversations.conf.activeConversationId);
-});
 
 // the active chat component or loading component.
 const activeChatComponent = computed(() => {
-    if (!conversations.isLoaded)
+    if (conversations.loading)
         return loading3;
-    else if (conversations.conf.activeConversationId)
+    else if (conversations.conversationsFetched && conversations.activeConversation)
         return SelectedChat;
-    else
+    else if (conversations.conversationsFetched && !conversations.loading)
         return NoChatSelected;
 });
 
@@ -40,8 +28,8 @@ const activeChatComponent = computed(() => {
         class="xs:absolute xs:z-10 md:static grow h-full xs:w-full md:w-fit scrollbar-hidden bg-white dark:bg-gray-800 transition-all duration-500"
         :class="conversations.conf.conversationOpen === 'open' ? ['xs:left-[0px]','xs:static'] : ['xs:left-[1000px]']" role="region">
         <Transition name="fade" mode="out-in">
-            <component :is="activeChatComponent" :active-conversation="activeConversation"
-                :key="activeConversation?.id" />
+            <component :is="activeChatComponent" :active-conversation="conversations.activeConversation"
+                :key="conversations.activeConversation?.id" />
         </Transition>
     </div>
 </template>

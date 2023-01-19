@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { PencilSquareIcon } from "@heroicons/vue/24/outline";
 
-import type { Ref } from "vue";
+import { computed, Ref } from "vue";
 import { ref, watch, onMounted } from "vue";
 
 import { useConversationsStore, Conversation as ConversationType } from "../../../../stores/conversations";
@@ -19,25 +19,22 @@ import { useChatStore } from "../../../../stores/chat";
 
 
 const conversations = useConversationsStore();
-const chat = useChatStore();
+
+conversations.fetchConversations(false);
 
 const searchText: Ref<string> = ref('');
 
 const composeOpen = ref(false);
 
-// the filterd list of conversations.
-const filteredConversations: Ref<ConversationType[] | undefined> = ref(conversations.conversations);
-
-// filter the list of conversation based on search text.
-watch([searchText], () => {
-    filteredConversations.value = conversations.conversations?.filter(
+const filteredConversations = computed(() => {
+    return conversations.conversations!.filter(
         (conversation) => getName(conversation)?.toLowerCase().includes(searchText.value.toLowerCase())
     );
-});
+})
 
 // (event) switch between the rendered conversations.
-const handleConversationChange = (conversationId: number) => {
-    conversations.setCurrentActiveConversation(conversationId);
+const handleConversationChange = (conversation: ConversationType) => {
+    conversations.setCurrentActiveConversation(conversation);
     conversations.setConversationOpen('open');
 };
 
@@ -72,23 +69,21 @@ onMounted(() => {
         <!--conversations-->
         <div role="list" aria-label="conversations" class="w-full h-full scroll-smooth scrollbar-hidden"
             style="overflow-x:visible; overflow-y: scroll;">
-            <Loading1 v-if="!conversations.isLoaded" v-for="item in 6" />
+            <Loading1 v-if="conversations.loading" />
 
-            <div v-else>
-                <div
-                    v-if="conversations.isLoaded && (filteredConversations as ConversationType[]).length > 0">
+            <div
+                v-if="!conversations.loading && conversations.conversationsFetched && filteredConversations!.length > 0">
 
-                    <FadeTransition>
-                        <component :is="ConversationsList" :filtered-conversations="filteredConversations"
-                            :active-id="(conversations.conf.activeConversationId as number)"
-                            :handle-conversation-change="handleConversationChange"
-                            :key="'active'" />
-                    </FadeTransition>
-                </div>
+                <FadeTransition>
+                    <component :is="ConversationsList" :filtered-conversations="filteredConversations"
+                        :active-id="(conversations.conf.activeConversationId as number)"
+                        :handle-conversation-change="handleConversationChange"
+                        :key="'active'" />
+                </FadeTransition>
+            </div>
 
-                <div v-else>
-                    <NoConversation v-if="(filteredConversations as ConversationType[]).length === 0" />
-                </div>
+            <div v-if="!conversations.loading && conversations.conversationsFetched && filteredConversations!.length === 0">
+                <NoConversation />
             </div>
         </div>
 

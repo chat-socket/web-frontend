@@ -118,3 +118,7 @@ export const parseJSON = (jsonText: string | null) => {
     }
     return JSON.parse(jsonText);
 }
+
+export const sleep = (ms: number) => {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}

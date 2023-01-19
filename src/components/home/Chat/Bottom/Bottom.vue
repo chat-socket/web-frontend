@@ -66,7 +66,7 @@ const handleClickOutside = (event: Event) => {
                 :remove-message-to-reply-to="removeMessageToReplyTo" />
         </div>
 
-        <div class="h-[80px] px-5 flex items-center" v-if="conversations.isLoaded"
+        <div class="h-[80px] px-5 flex items-center" v-if="!conversations.loading && conversations.conversationsFetched"
             :class="recording ? ['justify-between'] : []">
             <!--select attachments button-->
             <IconButton @click="openAttachmentsModal = true" v-if="!recording" class="group w-7 h-7 mr-5 ">
