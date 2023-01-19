@@ -11,8 +11,7 @@ export interface User {
     lastName: string,
     email: string,
     avatar: string,
-    token: string,
-    lastSeen: Date,
+    token: string
 };
 
 const useAuthStore = defineStore("auth", {
@@ -38,10 +37,6 @@ const useAuthStore = defineStore("auth", {
         userManager.events.addUserLoaded(newUser => {
             console.log("USER LOADED EVENT");
             userManager.storeUser(newUser);
-            userManager.getUser().then(usr => {
-                console.log("AFTER Get User");
-                console.log(usr);
-            });
           });
 
         userManager.getUser().then((oidcUser) => {

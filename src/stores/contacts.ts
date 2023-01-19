@@ -11,9 +11,6 @@ export class Contact {
     lastName!: string;
     avatar!: string;
     email?: string;
-
-    @Type(() => Date)
-    lastSeen!: Date;
 };
 
 
