@@ -4,6 +4,7 @@ import { UserManager, WebStorageStateStore, User as OidcUser } from "oidc-client
 import jwt_decode from "jwt-decode";
 import { ref } from "vue";
 import { USER } from "./fakeData";
+import { useWebsocketStore } from "./websocket";
 
 export class User {
     id: string;
@@ -33,6 +34,7 @@ const useAuthStore = defineStore("auth", {
     state: () => {
         const userStore = new WebStorageStateStore({ store: window.localStorage });
         const user: Ref<User | undefined> = ref(undefined);
+        const websocket = useWebsocketStore();
 
         const configuration = {
             'authority': import.meta.env.VITE_OAUTH_ISSUER,
@@ -53,15 +55,16 @@ const useAuthStore = defineStore("auth", {
             console.log("USER LOADED EVENT");
             userManager.storeUser(newUser);
             user.value = new User(newUser);
+            websocket.connect(user.value.token);
           });
 
         userManager.getUser().then((oidcUser) => {
             if (oidcUser && !oidcUser.expired) {
                 console.log("USER LOGGED IN");
                 user.value = new User(oidcUser);
+                websocket.connect(user.value.token);
             }
         });
-
 
         return {
             userManager,

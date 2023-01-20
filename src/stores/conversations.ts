@@ -6,6 +6,7 @@ import { plainToInstance, Type } from "class-transformer";
 import { getFullName, parseJSON, sleep } from "../utils";
 import { useContactsStore } from "./contacts";
 import useAuthStore from "./auth";
+import { useWebsocketStore } from "./websocket";
 
 
 export interface PreviewData {
@@ -73,6 +74,7 @@ export const useConversationsStore = defineStore('conversations', {
         const contacts = useContactsStore();
         contacts.fetchContacts();
         const auth = useAuthStore();
+        const websocket = useWebsocketStore();
         
         return {
             loading,    
@@ -82,6 +84,7 @@ export const useConversationsStore = defineStore('conversations', {
             conversationsFetched,
             activeConversation,
             conversations,
+            websocket,
         }
     },
     actions: {
