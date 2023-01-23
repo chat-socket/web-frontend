@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { computed, ref, Ref } from "vue";
 import { Client, messageCallbackType, StompSubscription } from '@stomp/stompjs';
+import SockJS from 'sockjs-client';
 
 
 export class WsSubcription {
@@ -20,17 +21,19 @@ export const useWebsocketStore = defineStore('websocket', {
     state: () => {
         const isConnected: Ref<boolean> = ref(false);
         const subcriptions: WsSubcription[] = [];
-
         const client = new Client({
-            brokerURL: import.meta.env.VITE_WS_ENDPOINT,
             debug: function (str) {
                 console.log(str);
             },
-            reconnectDelay: 500,
+            webSocketFactory: () => {
+                return new SockJS(import.meta.env.VITE_WS_ENDPOINT);
+            },
+            reconnectDelay: 5000,
             heartbeatIncoming: 4000,
             heartbeatOutgoing: 4000,
         });
 
+        const socket = 
         client.onConnect = function() {
             // Do something, all subscribes must be done is this callback
             // This is needed because this will be executed after a (re)connect
