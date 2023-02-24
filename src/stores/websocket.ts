@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
-import { computed, ref, Ref } from "vue";
+import { ref, Ref } from "vue";
 import { Client, messageCallbackType, StompSubscription } from '@stomp/stompjs';
-import SockJS from 'sockjs-client';
 
 
 export class WsSubcription {
@@ -22,11 +21,9 @@ export const useWebsocketStore = defineStore('websocket', {
         const isConnected: Ref<boolean> = ref(false);
         const subcriptions: WsSubcription[] = [];
         const client = new Client({
+            brokerURL: import.meta.env.VITE_WS_ENDPOINT,
             debug: function (str) {
                 console.log(str);
-            },
-            webSocketFactory: () => {
-                return new SockJS(import.meta.env.VITE_WS_ENDPOINT);
             },
             reconnectDelay: 5000,
             heartbeatIncoming: 4000,
