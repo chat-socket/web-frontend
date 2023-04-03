@@ -1,80 +1,42 @@
 import { defineStore } from "pinia";
 import { ref, Ref } from "vue";
-import { Client, messageCallbackType, StompSubscription } from '@stomp/stompjs';
-
-
-export class WsSubcription {
-    destination!: string;
-    callback!: messageCallbackType;
-    subscription!: StompSubscription;
-
-    constructor(destination: string, callback: messageCallbackType, subscription: StompSubscription) {
-        this.destination = destination;
-        this.callback = callback;
-        this.subscription = subscription;
-    }
-}
+import WebSocketWrapper from "ws-wrapper";
 
 
 export const useWebsocketStore = defineStore('websocket', {
     state: () => {
         const isConnected: Ref<boolean> = ref(false);
-        const subcriptions: WsSubcription[] = [];
-        const client = new Client({
-            brokerURL: import.meta.env.VITE_WS_ENDPOINT,
-            debug: function (str) {
-                console.log(str);
-            },
-            reconnectDelay: 5000,
-            heartbeatIncoming: 4000,
-            heartbeatOutgoing: 4000,
+        const client = new WebSocketWrapper(null, {
+            "requestTimeout": 30 * 1000,
+            "debug": true
         });
 
-        const socket = 
-        client.onConnect = function() {
-            // Do something, all subscribes must be done is this callback
-            // This is needed because this will be executed after a (re)connect
-            isConnected.value = true;
-            console.log("Connected to websocket !");
-            for (const subcription of subcriptions) {
-                console.log('Re-subcribing ' + subcription.destination);
-                subcription.subscription = client.subscribe(subcription.destination, subcription.callback);
-            }
-        };
-        
-        client.onStompError = function (frame) {
-            // Will be invoked in case of error encountered at Broker
-            // Bad login/passcode typically will cause an error
-            // Complaint brokers will set `message` header with a brief message. Body may contain details.
-            // Compliant brokers will terminate the connection after any error
-            console.log('Broker reported error: ' + frame.headers['message']);
-            console.log('Additional details: ' + frame.body);
-            isConnected.value = false;
-          };
+        client.autoReconnect = true;
 
-        const stormClient = ref(client);
+        client.on('connect', function () {
+            isConnected.value = true;
+        })
+
+        client.on('disconnect', function () {
+            isConnected.value = false;
+        })
 
         return {
-            subcriptions,
-            stormClient,
+            client,
             isConnected
         }
     },
     actions: {
         async connect(accessToken: string) {
             if (!this.isConnected) {
-                this.stormClient.connectHeaders = {
-                    Authorization: 'Bearer ' + accessToken,
-                }
-                this.stormClient.activate();
+                this.client.bind(new WebSocket(
+                    import.meta.env.VITE_WS_ENDPOINT, ['access_token', 'Bearer ' + accessToken]));
             }
         },
 
-        subcribe(destination: string, callback: messageCallbackType) {
+        subscribe(destination: string, callback: any) {
             if (this.isConnected) {
-                const subscription = this.stormClient.subscribe(destination, callback);
-                this.subcriptions.push(new WsSubcription(destination, callback, subscription));
-                return subscription;
+                this.client.of(destination).on("message", callback)
             } else {
                 throw new Error("Can't connect");
             }

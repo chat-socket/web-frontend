@@ -24,11 +24,11 @@
     "oidc-client-ts": "^2.2.0",
     "pinia": "^2.0.22",
     "reflect-metadata": "^0.1.13",
-    "sockjs-client": "^1.5.2",
     "video.js": "^7.20.3",
     "vue": "^3.2.40",
     "vue-router": "4",
-    "vue3-emoji-picker": "^1.1.4"
+    "vue3-emoji-picker": "^1.1.4",
+    "ws-wrapper": "^2.0.2"
   },
   "devDependencies": {
     "@types/sockjs-client": "^1.5.1",
