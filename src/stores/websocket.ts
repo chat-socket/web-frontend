@@ -1,17 +1,14 @@
 import { defineStore } from "pinia";
 import { ref, Ref } from "vue";
-import WebSocketWrapper from "ws-wrapper";
+import WebSocketWrapper from "ts-ws-wrapper/dist/WebSocketWrapper"
 
 
 export const useWebsocketStore = defineStore('websocket', {
     state: () => {
         const isConnected: Ref<boolean> = ref(false);
         const client = new WebSocketWrapper(null, {
-            "requestTimeout": 30 * 1000,
-            "debug": true
+            "requestTimeout": 30 * 1000
         });
-
-        client.autoReconnect = true;
 
         client.on('connect', function () {
             isConnected.value = true;
